@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ecommerce-restaurant/static/css/main.abd64e84.css",
+    "main.js": "/ecommerce-restaurant/static/js/main.e35ef707.js",
+    "index.html": "/ecommerce-restaurant/index.html",
+    "main.abd64e84.css.map": "/ecommerce-restaurant/static/css/main.abd64e84.css.map",
+    "main.e35ef707.js.map": "/ecommerce-restaurant/static/js/main.e35ef707.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.abd64e84.css",
+    "static/js/main.e35ef707.js"
+  ]
+}
