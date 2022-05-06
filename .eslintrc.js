@@ -23,6 +23,9 @@ module.exports = {
 		indent: 'off',
 		'comma-dangle': 'off',
 		'react/jsx-filename-extension': 'off',
-		'react/jsx-indent': 'off'
+		'react/jsx-indent': 'off',
+		'react/jsx-curly-spacing': 'off',
+		'no-console': 'off',
+		'array-bracket-spacing': 'off'
 	},
 };
