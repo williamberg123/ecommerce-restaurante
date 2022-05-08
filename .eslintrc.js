@@ -26,6 +26,9 @@ module.exports = {
 		'react/jsx-indent': 'off',
 		'react/jsx-curly-spacing': 'off',
 		'no-console': 'off',
-		'array-bracket-spacing': 'off'
+		'array-bracket-spacing': 'off',
+		'react/jsx-indent-props': 'off',
+		'max-len': 'off',
+		'object-curly-newline': 'off'
 	},
 };

@@ -1,0 +1,47 @@
+.MenuItem {
+	display: flex;
+	flex-direction: column;
+}
+
+.MenuItem button {
+	padding: 10px;
+	background-color: green;
+	color: white;
+	font-size: 1.1rem;
+	font-variant: small-caps;
+	font-weight: bold;
+	border: none;
+	border-radius: 0 0 10px 10px;
+	z-index: 2;
+}
+
+.MenuItem-info {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	border-radius: 10px 10px 0 0;
+	color: black;
+	font-family: 'Roboto', sans-serif;
+	text-align: left;
+}
+
+.MenuItem-info img {
+	border-radius: 10px 10px 0 0;
+}
+
+.MenuItem-info h2 {
+	margin: 10px;
+}
+
+.MenuItem-info p {
+	margin: 10px;
+}
+
+.item-price {
+	color: rgb(1, 112, 1);
+	font-weight: bold;
+}
+
+.item-price span {
+	margin-left: 3px;
+}

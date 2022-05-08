@@ -1,0 +1,16 @@
+.Title {
+	display: flex;
+	flex-direction: column;
+}
+
+.Title h1 {
+	font-size: 3.5rem;
+	color: rgb(255, 0, 0);
+	margin-top: 150px;
+	z-index: 2;
+}
+
+.Title h2 {
+	color: white;
+	z-index: 2;
+}

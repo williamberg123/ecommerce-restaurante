@@ -1,0 +1,32 @@
+body {
+	background-color: transparent;
+}
+
+.MenuContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.MenuContainer h1 {
+	position: sticky;
+	top: 0;
+	display: block;
+	text-align: left;
+	font-variant: small-caps;
+	color: red;
+	z-index: 3;
+	padding: 20px 0 20px 20px;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.MenuContainer-items {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	grid-gap: 20px;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 20px;
+}
+
+.MenuContainer-items a {
+	z-index: 2;
+}

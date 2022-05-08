@@ -14,7 +14,7 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://williamberg123.github.io/ecommerce-restaurant",
+  "homepage": "https://williamberg123.github.io/ecommerce-restaurante",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

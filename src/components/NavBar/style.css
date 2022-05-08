@@ -1,0 +1,24 @@
+.NavBar {
+	z-index: 2;
+	justify-self: flex-end;
+}
+
+.NavBar ul {
+	list-style: none;
+	display: flex;
+}
+
+.NavBar a {
+	color: white;
+	margin: 0 10px;
+	padding: 10px 20px;
+	font-weight: bold;
+	border-radius: 5px 5px 0 0;
+	transition: 0.4s;
+}
+
+.NavBar a:hover {
+	background-color: white;
+	color: rgb(255, 123, 0);
+	border-radius: 5px;
+}

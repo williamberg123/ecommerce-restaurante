@@ -1,25 +1,22 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
 import ShadowEffect from '../../components/ShadowEffect';
-import Title from '../../components/Title';
 
 import './style.css';
 
-export default function Home({ actuallyLink, funcSetActuallyLink }) {
-	// const htmlGenerating = allMenuData.map((item) => <p>{item.menuname}</p>);
-
+export default function OrderPage({ actuallyLink, funcSetActuallyLink }) {
 	return (
-		<div className="Home">
-			<ShadowEffect />
+		<div className="OrderPage">
 			<Header actuallyLink={actuallyLink} funcSetActuallyLink={funcSetActuallyLink} />
-			<Title />
+			<ShadowEffect />
 		</div>
 	);
 }
 
-Home.propTypes = {
+OrderPage.propTypes = {
 	actuallyLink: PropTypes.string.isRequired,
 	funcSetActuallyLink: PropTypes.func.isRequired
 };
