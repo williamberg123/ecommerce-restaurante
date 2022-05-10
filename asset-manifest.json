@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/ecommerce-restaurante/static/css/main.1e26b695.css",
-    "main.js": "/ecommerce-restaurante/static/js/main.2f9b949a.js",
+    "main.css": "/ecommerce-restaurante/static/css/main.9838799f.css",
+    "main.js": "/ecommerce-restaurante/static/js/main.3b421792.js",
     "static/media/imagem-do-site.jpg": "/ecommerce-restaurante/static/media/imagem-do-site.58e2262687376c7c7e07.jpg",
     "index.html": "/ecommerce-restaurante/index.html",
-    "main.1e26b695.css.map": "/ecommerce-restaurante/static/css/main.1e26b695.css.map",
-    "main.2f9b949a.js.map": "/ecommerce-restaurante/static/js/main.2f9b949a.js.map"
+    "main.9838799f.css.map": "/ecommerce-restaurante/static/css/main.9838799f.css.map",
+    "main.3b421792.js.map": "/ecommerce-restaurante/static/js/main.3b421792.js.map"
   },
   "entrypoints": [
-    "static/css/main.1e26b695.css",
-    "static/js/main.2f9b949a.js"
+    "static/css/main.9838799f.css",
+    "static/js/main.3b421792.js"
   ]
 }
