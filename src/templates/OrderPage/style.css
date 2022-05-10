@@ -1,7 +1,7 @@
 .OrderPage {
 	width: 100%;
 	min-height: 100vh;
-	background: url('../../images/imagem-do-site.jpg') center;
+	background: url('../../images/imagem-do-site.jpg') center fixed;
 	background-size: cover;
 	position: relative;
 	font-family: 'Poppins', sans-serif;

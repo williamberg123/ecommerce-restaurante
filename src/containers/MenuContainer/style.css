@@ -1,7 +1,3 @@
-body {
-	background-color: transparent;
-}
-
 .MenuContainer {
 	display: flex;
 	flex-direction: column;
@@ -19,14 +15,8 @@ body {
 	background-color: rgba(0, 0, 0, 0.7);
 }
 
-.MenuContainer-items {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-	grid-gap: 20px;
-	background-color: rgba(0, 0, 0, 0.5);
-	padding: 20px;
-}
-
-.MenuContainer-items a {
-	z-index: 2;
+@media (max-width: 500px) {
+	.MenuContainer h1 {
+		font-size: 1.3rem;
+	}
 }

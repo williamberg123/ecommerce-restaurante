@@ -8,15 +8,17 @@ import OrderPage from './templates/OrderPage';
 import MenuPage from './templates/MenuPage';
 import MenuItemPage from './templates/MenuItemPage';
 
-export default function AppRoutes({ actuallyLink, funcSetActuallyLink, allMenuData }) {
+export default function AppRoutes({
+	allMenuData, allOrders, actuallyPage, funcSetActuallyPage, funcAddOrder, funcRemoveOrder
+}) {
 	return (
 		<Routes>
 			<Route
 				path="/ecommerce-restaurante/"
 				element={(
 					<Home
-						actuallyLink={actuallyLink}
-						funcSetActuallyLink={funcSetActuallyLink}
+						actuallyPage={actuallyPage}
+						funcSetActuallyPage={funcSetActuallyPage}
 					/>
 				)}
 			/>
@@ -24,9 +26,10 @@ export default function AppRoutes({ actuallyLink, funcSetActuallyLink, allMenuDa
 				path="/ecommerce-restaurante/cardapio"
 				element={(
 					<MenuPage
-						actuallyLink={actuallyLink}
-						funcSetActuallyLink={funcSetActuallyLink}
 						allMenuData={allMenuData}
+						actuallyPage={actuallyPage}
+						funcSetActuallyPage={funcSetActuallyPage}
+						funcOrder={funcAddOrder}
 					/>
 				)}
 			/>
@@ -40,9 +43,10 @@ export default function AppRoutes({ actuallyLink, funcSetActuallyLink, allMenuDa
 				path="/ecommerce-restaurante/pedidos"
 				element={(
 					<OrderPage
-						actuallyLink={actuallyLink}
-						funcSetActuallyLink={funcSetActuallyLink}
-						allMenuData={allMenuData}
+						allOrders={allOrders}
+						actuallyPage={actuallyPage}
+						funcSetActuallyPage={funcSetActuallyPage}
+						funcOrder={funcRemoveOrder}
 					/>
 				)}
 			/>
@@ -51,7 +55,10 @@ export default function AppRoutes({ actuallyLink, funcSetActuallyLink, allMenuDa
 }
 
 AppRoutes.propTypes = {
-	actuallyLink: PropTypes.string.isRequired,
-	funcSetActuallyLink: PropTypes.func.isRequired,
-	allMenuData: PropTypes.instanceOf(Array).isRequired
+	allMenuData: PropTypes.instanceOf(Array).isRequired,
+	allOrders: PropTypes.instanceOf(Array).isRequired,
+	actuallyPage: PropTypes.string.isRequired,
+	funcSetActuallyPage: PropTypes.func.isRequired,
+	funcAddOrder: PropTypes.func.isRequired,
+	funcRemoveOrder: PropTypes.func.isRequired
 };

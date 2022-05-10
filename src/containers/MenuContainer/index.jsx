@@ -1,43 +1,32 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-
-import MenuItem from '../../components/MenuItem';
+import MenuItems from '../MenuItems';
 
 import './style.css';
 
-export default function MenuContainer({ allMenuData }) {
-	const menuContent = allMenuData.map((menuItem) => {
-		const {
-			menuname,
-			description,
-			_id,
-			price,
-			imageUrl
-		} = menuItem;
-
-		return (
-			<MenuItem
-				key={_id}
-				itemId={_id}
-				name={menuname}
-				description={description}
-				price={price}
-				imageUrl={imageUrl}
-			/>
-		);
-	});
-
+export default function MenuContainer({ allMenuData, funcOrder, title, whichIconMustHave }) {
 	return (
 		<div className="MenuContainer">
-			<h1>cardápio disponível</h1>
-			<div className="MenuContainer-items">
-				{menuContent}
-			</div>
+			<h1>{title}</h1>
+			{
+				!allMenuData.length
+					? ''
+					: (
+						<MenuItems
+							allMenuData={allMenuData}
+							funcOrder={funcOrder}
+							whichIconMustHave={whichIconMustHave}
+						/>
+					)
+			}
 		</div>
 	);
 }
 
 MenuContainer.propTypes = {
-	allMenuData: PropTypes.instanceOf(Array).isRequired
+	allMenuData: PropTypes.instanceOf(Array).isRequired,
+	funcOrder: PropTypes.func,
+	title: PropTypes.string.isRequired,
+	whichIconMustHave: PropTypes.string.isRequired
 };

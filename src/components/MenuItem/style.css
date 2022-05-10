@@ -4,44 +4,76 @@
 }
 
 .MenuItem button {
-	padding: 10px;
-	background-color: green;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	color: white;
 	font-size: 1.1rem;
 	font-variant: small-caps;
 	font-weight: bold;
 	border: none;
-	border-radius: 0 0 10px 10px;
-	z-index: 2;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 3px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.MenuItem button.noWasOrder {
+	background-color: rgb(70, 194, 70);
+}
+
+.MenuItem button.noWasOrder:hover {
+	background-color: rgb(102, 247, 145);
+}
+
+.MenuItem button.wasOrder:disabled {
+	background-color: rgb(102, 247, 145);
+	cursor: not-allowed;
+}
+
+.MenuItem button.deleteOrder {
+	background-color: rgb(192, 36, 36);
 }
 
 .MenuItem-info {
 	display: flex;
 	flex-direction: column;
 	background-color: white;
-	border-radius: 10px 10px 0 0;
+	border-radius: 10px;
 	color: black;
 	font-family: 'Roboto', sans-serif;
 	text-align: left;
+	z-index: 2;
+}
+
+.MenuItem-info a {
+	color: black;
 }
 
 .MenuItem-info img {
 	border-radius: 10px 10px 0 0;
+	width: 100%;
 }
 
 .MenuItem-info h2 {
 	margin: 10px;
+	font-variant: small-caps;
+	font-weight: bolder;
 }
 
 .MenuItem-info p {
 	margin: 10px;
+	font-size: 0.9rem;
+	color: #111;
 }
 
-.item-price {
-	color: rgb(1, 112, 1);
+p.item-price {
+	color: rgb(15, 201, 15);
 	font-weight: bold;
+	font-size: 1rem;
 }
 
-.item-price span {
+p.item-price span {
 	margin-left: 3px;
 }

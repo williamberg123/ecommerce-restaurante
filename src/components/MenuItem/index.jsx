@@ -1,27 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
 import './style.css';
+import MenuItemInfo from '../../containers/MenuItemInfo';
 
-export default function MenuItem({ name, description, itemId, price, imageUrl }) {
+export default function MenuItem({
+	name, description, itemId, price, imageUrl, funcOrder, hasAlreadyBeenOrdered, whichIconMustHave
+}) {
+	const propsOfItemInfo = {
+		name,
+		description,
+		itemId,
+		price,
+		imageUrl,
+		funcOrder,
+		hasAlreadyBeenOrdered,
+		whichIconMustHave
+	};
+
 	return (
 		<div className="MenuItem">
-			<Link to={`/ecommerce-restaurante/cardapio/${itemId}`}>
-				<div className="MenuItem-info">
-					<img src={imageUrl} alt={name} />
-					<h2>{name}</h2>
-					<p>{description}</p>
-					<p className="item-price">
-						R$
-						<span className="item-value">
-							{price}
-						</span>
-					</p>
-				</div>
-			</Link>
-			<button type="button">adicionar aos pedidos</button>
+			<MenuItemInfo
+				itemData={propsOfItemInfo}
+			/>
 		</div>
 	);
 }
@@ -31,5 +33,8 @@ MenuItem.propTypes = {
 	description: PropTypes.string.isRequired,
 	itemId: PropTypes.string.isRequired,
 	price: PropTypes.string.isRequired,
-	imageUrl: PropTypes.string.isRequired
+	imageUrl: PropTypes.string.isRequired,
+	funcOrder: PropTypes.func.isRequired,
+	hasAlreadyBeenOrdered: PropTypes.bool.isRequired,
+	whichIconMustHave: PropTypes.string.isRequired
 };

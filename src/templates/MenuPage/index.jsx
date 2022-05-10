@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -8,19 +8,33 @@ import MenuContainer from '../../containers/MenuContainer';
 
 import './style.css';
 
-export default function MenuPage({ actuallyLink, funcSetActuallyLink, allMenuData }) {
-	console.log(allMenuData);
+export default function MenuPage({ actuallyPage, funcSetActuallyPage, allMenuData, funcOrder }) {
+	const [ allMenu, setAllMenu ] = useState([]);
+
+	useEffect(() => {
+		setAllMenu(allMenuData);
+	}, [allMenuData]);
+
 	return (
 		<div className="MenuPage">
 			<ShadowEffect />
-			<Header actuallyLink={actuallyLink} funcSetActuallyLink={funcSetActuallyLink} />
-			<MenuContainer allMenuData={allMenuData} />
+			<Header
+				actuallyPage={actuallyPage}
+				funcSetActuallyPage={funcSetActuallyPage}
+			/>
+			<MenuContainer
+				allMenuData={allMenu}
+				funcOrder={funcOrder}
+				title="cardápio disponível"
+				whichIconMustHave="check"
+			/>
 		</div>
 	);
 }
 
 MenuPage.propTypes = {
-	actuallyLink: PropTypes.string.isRequired,
-	funcSetActuallyLink: PropTypes.func.isRequired,
-	allMenuData: PropTypes.instanceOf(Array).isRequired
+	actuallyPage: PropTypes.string.isRequired,
+	funcSetActuallyPage: PropTypes.func.isRequired,
+	allMenuData: PropTypes.instanceOf(Array).isRequired,
+	funcOrder: PropTypes.func.isRequired
 };

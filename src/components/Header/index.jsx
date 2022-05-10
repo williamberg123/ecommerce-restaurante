@@ -5,15 +5,15 @@ import NavBar from '../NavBar';
 
 import './style.css';
 
-export default function Header({ actuallyLink, funcSetActuallyLink }) {
+export default function Header({ actuallyPage, funcSetActuallyPage }) {
 	return (
 		<header className="Header">
-			<NavBar actuallyLink={actuallyLink} funcSetActuallyLink={funcSetActuallyLink} />
+			<NavBar actuallyPage={actuallyPage} funcSetActuallyPage={funcSetActuallyPage} />
 		</header>
 	);
 }
 
 Header.propTypes = {
-	actuallyLink: PropTypes.string.isRequired,
-	funcSetActuallyLink: PropTypes.func.isRequired
+	actuallyPage: PropTypes.string.isRequired,
+	funcSetActuallyPage: PropTypes.func.isRequired
 };

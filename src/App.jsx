@@ -1,57 +1,87 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import AppRoutes from './routes';
+
+import loadAllMenuData from './utils/fetchAllMenuData';
 
 import './App.css';
 
 export default function App() {
-	const [ actuallyLink, setActuallyLink ] = useState('home');
+	const [ actuallyPage, setActuallyPage ] = useState('home');
 	const [ allMenuData, setAllMenuData ] = useState([]);
+	const [ allOrders, setAllOrders ] = useState([]);
 	const [ baseUrl ] = useState('https://foodbukka.herokuapp.com/api/v1/menu');
 
-	const loadAllMenuData = async () => {
-		const menuData = await axios(baseUrl);
-		const menuResults = menuData.data.Result;
-		const menuAndPrice = menuResults.map((item) => {
-			const randomIndex = Math.floor(Math.random() * 3);
-			const randomPrice = (Math.random() * 60) + 10;
+	const funcSetActuallyPage = (page) => {
+		setActuallyPage(page);
+	};
 
-			return { ...item, price: randomPrice.toFixed(2), imageUrl: item.images[randomIndex] };
-		});
+	const updateAllMenuData = (item, itemIndex) => {
+		const copyOfAllMenuData = [...allMenuData];
+		item.hasAlreadyBeenOrdered = !item.hasAlreadyBeenOrdered;
 
+		copyOfAllMenuData[itemIndex] = item;
+		setAllMenuData(copyOfAllMenuData);
+	};
+
+	const addNewOrder = (item) => {
+		const copyOfOrders = [ ...allOrders ];
+		const order = { ...item };
+
+		order.hasAlreadyBeenOrdered = false;
+		copyOfOrders.push(order);
+
+		setAllOrders(copyOfOrders);
+	};
+
+	const removeOneOrder = (itemIndexInOrders) => {
+		const copyOfOrders = [ ...allOrders ];
+		copyOfOrders.splice(itemIndexInOrders, 1);
+
+		setAllOrders(copyOfOrders);
+	};
+
+	const addOrder = (e, menuItemId) => {
+		const copyOfAllMenuData = [...allMenuData];
+
+		const itemIndex = copyOfAllMenuData.findIndex((item) => item['_id'] === menuItemId);
+		const item = copyOfAllMenuData.find((item) => item['_id'] === menuItemId);
+
+		addNewOrder(item);
+		updateAllMenuData(item, itemIndex, copyOfAllMenuData);
+	};
+
+	const removeOrder = (e, menuItemId) => {
+		const copyOfAllMenuData = [...allMenuData];
+		const copyOfAllOrders = [...allOrders];
+
+		const itemIndexInMenu = copyOfAllMenuData.findIndex((item) => item['_id'] === menuItemId);
+		const itemIndexInOrders = copyOfAllOrders.findIndex((item) => item['_id'] === menuItemId);
+
+		const item = copyOfAllMenuData.find((item) => item['_id'] === menuItemId);
+
+		removeOneOrder(itemIndexInOrders);
+		updateAllMenuData(item, itemIndexInMenu, copyOfAllMenuData);
+	};
+
+	const loadMenuAndPrice = async () => {
+		const menuAndPrice = await loadAllMenuData(baseUrl);
 		setAllMenuData(menuAndPrice);
 	};
 
 	useEffect(() => {
-		loadAllMenuData();
+		loadMenuAndPrice();
 	}, []);
-
-	const funcSetActuallyLink = (e) => {
-		switch (e.target.innerText.toLowerCase()) {
-			case 'home':
-				setActuallyLink('home');
-			break;
-
-			case 'cardápio':
-				setActuallyLink('menu');
-			break;
-
-			case 'seus pedidos':
-				setActuallyLink('order');
-			break;
-
-			default:
-			break;
-		}
-	};
 
     return (
 		<div className="App">
 			<AppRoutes
-				actuallyLink={actuallyLink}
-				funcSetActuallyLink={funcSetActuallyLink}
 				allMenuData={allMenuData}
+				allOrders={allOrders}
+				actuallyPage={actuallyPage}
+				funcSetActuallyPage={funcSetActuallyPage}
+				funcAddOrder={addOrder}
+				funcRemoveOrder={removeOrder}
 			/>
 		</div>
     );

@@ -1,0 +1,17 @@
+.MenuContainer-items {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	grid-gap: 20px;
+	background-color: rgba(0, 0, 0, 0.7);
+	padding: 20px;
+}
+
+.MenuContainer-items a {
+	z-index: 2;
+}
+
+@media (max-width: 500px) {
+	.MenuContainer-items {
+		padding: 10px;
+	}
+}

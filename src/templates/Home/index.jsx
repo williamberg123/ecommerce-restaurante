@@ -7,19 +7,17 @@ import Title from '../../components/Title';
 
 import './style.css';
 
-export default function Home({ actuallyLink, funcSetActuallyLink }) {
-	// const htmlGenerating = allMenuData.map((item) => <p>{item.menuname}</p>);
-
+export default function Home({ actuallyPage, funcSetActuallyPage }) {
 	return (
 		<div className="Home">
 			<ShadowEffect />
-			<Header actuallyLink={actuallyLink} funcSetActuallyLink={funcSetActuallyLink} />
+			<Header actuallyPage={actuallyPage} funcSetActuallyPage={funcSetActuallyPage} />
 			<Title />
 		</div>
 	);
 }
 
 Home.propTypes = {
-	actuallyLink: PropTypes.string.isRequired,
-	funcSetActuallyLink: PropTypes.func.isRequired
+	actuallyPage: PropTypes.string.isRequired,
+	funcSetActuallyPage: PropTypes.func.isRequired
 };

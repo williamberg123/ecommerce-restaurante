@@ -29,6 +29,10 @@ module.exports = {
 		'array-bracket-spacing': 'off',
 		'react/jsx-indent-props': 'off',
 		'max-len': 'off',
-		'object-curly-newline': 'off'
+		'object-curly-newline': 'off',
+		'no-shadow': 'off',
+		'dot-notation': 'off',
+		'no-param-reassign': 'off',
+		'react/require-default-props': 'off'
 	},
 };
