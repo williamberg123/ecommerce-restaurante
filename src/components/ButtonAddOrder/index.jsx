@@ -1,25 +1,24 @@
-import React from 'react';
-
-import { FaCheckCircle, FaWindowClose } from 'react-icons/fa';
-
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function ButtonAddOrder({ hasAlreadyBeenOrdered, funcOrder, itemId, whichIconMustHave }) {
-	const whichClassMustHave = () => {
-		let classMustHave = '';
+import { FaCheckCircle, FaWindowClose, FaPlusCircle } from 'react-icons/fa';
 
-		if (hasAlreadyBeenOrdered && whichIconMustHave === 'check') {
-			classMustHave = 'wasOrder';
-		} else if (whichIconMustHave === 'close') {
-			classMustHave = 'deleteOrder';
-		} else {
-			classMustHave = 'noWasOrder';
-		}
+import AppContext from '../../AppContext';
+import MenuContainerContext from '../../containers/MenuContainer/MenuContainerContext';
 
-		return classMustHave;
-	};
+import whichClassMustHave from '../../utils/whichClassMustHave';
 
-	const classMustHave = whichClassMustHave();
+export default function ButtonAddOrder({ hasAlreadyBeenOrdered, itemId }) {
+	const [ iconsArray ] = useState({
+		wasOrder: <FaCheckCircle />,
+		noWasOrder: <FaPlusCircle />,
+		deleteOrder: <FaWindowClose />
+	});
+
+	const { actuallyPage } = useContext(AppContext);
+	const { funcOrder } = useContext(MenuContainerContext);
+
+	const classMustHave = whichClassMustHave(hasAlreadyBeenOrdered, actuallyPage);
 
 	return (
 		<button
@@ -29,19 +28,7 @@ export default function ButtonAddOrder({ hasAlreadyBeenOrdered, funcOrder, itemI
 			onClick={(e) => funcOrder(e, itemId)}
 		>
 			{
-				(hasAlreadyBeenOrdered && whichIconMustHave === 'check') && (
-					<FaCheckCircle />
-				)
-			}
-			{
-				(!hasAlreadyBeenOrdered && whichIconMustHave === 'check') && (
-					'adicionar aos pedidos'
-				)
-			}
-			{
-			whichIconMustHave === 'close' && (
-				<FaWindowClose />
-			)
+				iconsArray[classMustHave]
 			}
 		</button>
 	);
@@ -49,7 +36,5 @@ export default function ButtonAddOrder({ hasAlreadyBeenOrdered, funcOrder, itemI
 
 ButtonAddOrder.propTypes = {
 	hasAlreadyBeenOrdered: PropTypes.bool.isRequired,
-	funcOrder: PropTypes.func.isRequired,
-	itemId: PropTypes.string.isRequired,
-	whichIconMustHave: PropTypes.string.isRequired
+	itemId: PropTypes.string.isRequired
 };

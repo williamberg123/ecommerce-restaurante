@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const loadAllMenuData = async (baseUrl) => {
+const loadAllMenu = async (baseUrl) => {
 	const menuData = await axios(baseUrl);
 	const menuResults = menuData.data.Result;
 
@@ -19,4 +19,4 @@ const loadAllMenuData = async (baseUrl) => {
 	return menuAndPrice;
 };
 
-export default loadAllMenuData;
+export default loadAllMenu;

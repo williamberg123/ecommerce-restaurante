@@ -6,8 +6,8 @@ import MenuItem from '../../components/MenuItem';
 
 import './style.css';
 
-export default function MenuItems({ allMenuData, funcOrder, whichIconMustHave }) {
-	const menuContent = allMenuData.map((menuItem) => {
+export default function MenuItems({ dataToBeShown }) {
+	const menuChildren = dataToBeShown.map((menuItem) => {
 		const {
 			menuname,
 			description,
@@ -25,22 +25,18 @@ export default function MenuItems({ allMenuData, funcOrder, whichIconMustHave })
 				description={description}
 				price={price}
 				imageUrl={imageUrl}
-				funcOrder={funcOrder}
 				hasAlreadyBeenOrdered={hasAlreadyBeenOrdered}
-				whichIconMustHave={whichIconMustHave}
 			/>
 		);
 	});
 
 	return (
 		<div className="MenuContainer-items">
-				{menuContent}
+			{menuChildren}
 		</div>
 	);
 }
 
 MenuItems.propTypes = {
-	allMenuData: PropTypes.instanceOf(Array).isRequired,
-	funcOrder: PropTypes.func.isRequired,
-	whichIconMustHave: PropTypes.string.isRequired
+	dataToBeShown: PropTypes.instanceOf(Array).isRequired
 };

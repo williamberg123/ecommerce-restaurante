@@ -33,6 +33,7 @@ module.exports = {
 		'no-shadow': 'off',
 		'dot-notation': 'off',
 		'no-param-reassign': 'off',
-		'react/require-default-props': 'off'
+		'react/require-default-props': 'off',
+		'no-restricted-syntax': 'off'
 	},
 };

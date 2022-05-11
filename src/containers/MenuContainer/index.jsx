@@ -1,32 +1,39 @@
-import React from 'react';
-
+import React, { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
+
 import MenuItems from '../MenuItems';
+
+import AppContext from '../../AppContext';
+import MenuContainerContext from './MenuContainerContext';
 
 import './style.css';
 
-export default function MenuContainer({ allMenuData, funcOrder, title, whichIconMustHave }) {
+export default function MenuContainer({ funcOrder, title }) {
+	const { actuallyPage, allMenu, allOrders } = useContext(AppContext);
+
+	const dataToBeShown = actuallyPage === 'menu'
+	? allMenu
+	: allOrders;
+
+	const memoizedMenuContainerContext = useMemo(() => ({ funcOrder }), [funcOrder]);
+
 	return (
 		<div className="MenuContainer">
 			<h1>{title}</h1>
 			{
-				!allMenuData.length
-					? ''
-					: (
+				!!dataToBeShown.length && (
+					<MenuContainerContext.Provider value={memoizedMenuContainerContext}>
 						<MenuItems
-							allMenuData={allMenuData}
-							funcOrder={funcOrder}
-							whichIconMustHave={whichIconMustHave}
+							dataToBeShown={dataToBeShown}
 						/>
-					)
+					</MenuContainerContext.Provider>
+				)
 			}
 		</div>
 	);
 }
 
 MenuContainer.propTypes = {
-	allMenuData: PropTypes.instanceOf(Array).isRequired,
 	funcOrder: PropTypes.func,
-	title: PropTypes.string.isRequired,
-	whichIconMustHave: PropTypes.string.isRequired
+	title: PropTypes.string.isRequired
 };

@@ -1,35 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
-
-import PropTypes from 'prop-types';
 
 import Home from './templates/Home';
 import OrderPage from './templates/OrderPage';
 import MenuPage from './templates/MenuPage';
 import MenuItemPage from './templates/MenuItemPage';
 
-export default function AppRoutes({
-	allMenuData, allOrders, actuallyPage, funcSetActuallyPage, funcAddOrder, funcRemoveOrder
-}) {
+import AppContext from './AppContext';
+
+export default function AppRoutes() {
+	const { addOrder, removeOrder } = useContext(AppContext);
+
 	return (
 		<Routes>
 			<Route
 				path="/ecommerce-restaurante/"
 				element={(
-					<Home
-						actuallyPage={actuallyPage}
-						funcSetActuallyPage={funcSetActuallyPage}
-					/>
+					<Home />
 				)}
 			/>
 			<Route
 				path="/ecommerce-restaurante/cardapio"
 				element={(
 					<MenuPage
-						allMenuData={allMenuData}
-						actuallyPage={actuallyPage}
-						funcSetActuallyPage={funcSetActuallyPage}
-						funcOrder={funcAddOrder}
+						funcOrder={addOrder}
 					/>
 				)}
 			/>
@@ -43,22 +37,10 @@ export default function AppRoutes({
 				path="/ecommerce-restaurante/pedidos"
 				element={(
 					<OrderPage
-						allOrders={allOrders}
-						actuallyPage={actuallyPage}
-						funcSetActuallyPage={funcSetActuallyPage}
-						funcOrder={funcRemoveOrder}
+						funcOrder={removeOrder}
 					/>
 				)}
 			/>
 		</Routes>
 	);
 }
-
-AppRoutes.propTypes = {
-	allMenuData: PropTypes.instanceOf(Array).isRequired,
-	allOrders: PropTypes.instanceOf(Array).isRequired,
-	actuallyPage: PropTypes.string.isRequired,
-	funcSetActuallyPage: PropTypes.func.isRequired,
-	funcAddOrder: PropTypes.func.isRequired,
-	funcRemoveOrder: PropTypes.func.isRequired
-};

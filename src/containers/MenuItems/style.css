@@ -10,6 +10,12 @@
 	z-index: 2;
 }
 
+@media (max-width: 600px) {
+	.MenuContainer-items {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
 @media (max-width: 500px) {
 	.MenuContainer-items {
 		padding: 10px;

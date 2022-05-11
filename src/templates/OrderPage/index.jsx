@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -8,19 +8,12 @@ import MenuContainer from '../../containers/MenuContainer';
 
 import './style.css';
 
-export default function OrderPage({ allOrders, actuallyPage, funcSetActuallyPage, funcOrder }) {
-	const [ allOrdersData, setAllOrdersData ] = useState([]);
-
-	useEffect(() => {
-		setAllOrdersData(allOrders);
-	}, [allOrders]);
-
+export default function OrderPage({ funcOrder }) {
 	return (
 		<div className="OrderPage">
-			<Header actuallyPage={actuallyPage} funcSetActuallyPage={funcSetActuallyPage} />
+			<Header />
 			<ShadowEffect />
 			<MenuContainer
-				allMenuData={allOrdersData}
 				title="seus pedidos"
 				whichIconMustHave="close"
 				funcOrder={funcOrder}
@@ -30,8 +23,5 @@ export default function OrderPage({ allOrders, actuallyPage, funcSetActuallyPage
 }
 
 OrderPage.propTypes = {
-	allOrders: PropTypes.instanceOf(Array).isRequired,
-	actuallyPage: PropTypes.string.isRequired,
-	funcSetActuallyPage: PropTypes.func.isRequired,
 	funcOrder: PropTypes.func.isRequired
 };

@@ -1,28 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import AppRoutes from './routes';
 
-import loadAllMenuData from './utils/fetchAllMenuData';
+import AppContext from './AppContext';
+
+import loadAllMenu from './utils/fetchAllMenuData';
 
 import './App.css';
 
 export default function App() {
 	const [ actuallyPage, setActuallyPage ] = useState('home');
-	const [ allMenuData, setAllMenuData ] = useState([]);
+	const [ allMenu, setAllMenu ] = useState([]);
 	const [ allOrders, setAllOrders ] = useState([]);
 	const [ baseUrl ] = useState('https://foodbukka.herokuapp.com/api/v1/menu');
 
-	const funcSetActuallyPage = (page) => {
+	const funcSetActuallyPage = useCallback((page) => {
 		setActuallyPage(page);
-	};
+	}, []);
 
-	const updateAllMenuData = (item, itemIndex) => {
-		const copyOfAllMenuData = [...allMenuData];
+	const updateAllMenu = useCallback((item, itemIndex) => {
+		const copyOfAllMenu = [...allMenu];
 		item.hasAlreadyBeenOrdered = !item.hasAlreadyBeenOrdered;
 
-		copyOfAllMenuData[itemIndex] = item;
-		setAllMenuData(copyOfAllMenuData);
-	};
+		copyOfAllMenu[itemIndex] = item;
+		setAllMenu(copyOfAllMenu);
+	}, [allMenu]);
 
 	const addNewOrder = (item) => {
 		const copyOfOrders = [ ...allOrders ];
@@ -42,47 +44,71 @@ export default function App() {
 	};
 
 	const addOrder = (e, menuItemId) => {
-		const copyOfAllMenuData = [...allMenuData];
+		const copyOfAllMenu = [...allMenu];
 
-		const itemIndex = copyOfAllMenuData.findIndex((item) => item['_id'] === menuItemId);
-		const item = copyOfAllMenuData.find((item) => item['_id'] === menuItemId);
+		const itemIndex = copyOfAllMenu.findIndex((item) => item['_id'] === menuItemId);
+		const item = copyOfAllMenu.find((item) => item['_id'] === menuItemId);
 
 		addNewOrder(item);
-		updateAllMenuData(item, itemIndex, copyOfAllMenuData);
+		updateAllMenu(item, itemIndex, copyOfAllMenu);
 	};
 
 	const removeOrder = (e, menuItemId) => {
-		const copyOfAllMenuData = [...allMenuData];
+		const copyOfAllMenu = [...allMenu];
 		const copyOfAllOrders = [...allOrders];
 
-		const itemIndexInMenu = copyOfAllMenuData.findIndex((item) => item['_id'] === menuItemId);
+		const itemIndexInMenu = copyOfAllMenu.findIndex((item) => item['_id'] === menuItemId);
 		const itemIndexInOrders = copyOfAllOrders.findIndex((item) => item['_id'] === menuItemId);
 
-		const item = copyOfAllMenuData.find((item) => item['_id'] === menuItemId);
+		const item = copyOfAllMenu.find((item) => item['_id'] === menuItemId);
 
 		removeOneOrder(itemIndexInOrders);
-		updateAllMenuData(item, itemIndexInMenu, copyOfAllMenuData);
+		updateAllMenu(item, itemIndexInMenu, copyOfAllMenu);
+	};
+
+	const removeDuplicateItems = (arrayOfObjects) => {
+		const copyOfArray = arrayOfObjects;
+
+		for (const obj of arrayOfObjects) {
+			copyOfArray.forEach((item, index) => {
+				if (!(index === arrayOfObjects.indexOf(obj))) {
+					if (obj.menuname === item.menuname) {
+						copyOfArray.splice(index, 1);
+					}
+				}
+			});
+		}
+
+		return copyOfArray;
 	};
 
 	const loadMenuAndPrice = async () => {
-		const menuAndPrice = await loadAllMenuData(baseUrl);
-		setAllMenuData(menuAndPrice);
+		let menuAndPrice = await loadAllMenu(baseUrl);
+		menuAndPrice = removeDuplicateItems(menuAndPrice);
+		setAllMenu(menuAndPrice);
+
+		// const outDuplicate = removeDuplicateItems([...menuAndPrice]);
+		// for (let obj of outDuplicate) {
+		// 	console.log(obj.menuname);
+		// }
 	};
 
 	useEffect(() => {
 		loadMenuAndPrice();
 	}, []);
 
+	const memoizedContext = useMemo(
+		() => (
+			{ actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder }
+		),
+		[actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder]
+	);
+
     return (
 		<div className="App">
-			<AppRoutes
-				allMenuData={allMenuData}
-				allOrders={allOrders}
-				actuallyPage={actuallyPage}
-				funcSetActuallyPage={funcSetActuallyPage}
-				funcAddOrder={addOrder}
-				funcRemoveOrder={removeOrder}
-			/>
+			<AppContext.Provider value={memoizedContext}>
+				<AppRoutes />
+			</AppContext.Provider>
 		</div>
     );
 }
