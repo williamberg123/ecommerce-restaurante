@@ -7,14 +7,14 @@ import Image from '../../components/Image';
 import ButtonAddOrder from '../../components/ButtonAddOrder';
 
 export default function ItemInfo({ itemData }) {
-	const { name, description, itemId, price, imageUrl, hasAlreadyBeenOrdered } = itemData;
+	const { menuname, description, _id, price, imageUrl, hasAlreadyBeenOrdered } = itemData;
 
 	return (
 		<div className="MenuItem-info">
-			<Link to={`/ecommerce-restaurante/cardapio/${itemId}`}>
-				<Image imageUrl={imageUrl} altName={name} />
+			<Link to={`/ecommerce-restaurante/cardapio/${_id}`}>
+				<Image imageUrl={imageUrl} altName={menuname} />
 				<div className="MenuItem-text">
-					<h2>{name.toLowerCase()}</h2>
+					<h2>{menuname.toLowerCase()}</h2>
 					<p>{description}</p>
 					<p className="item-price">
 						R$
@@ -26,7 +26,7 @@ export default function ItemInfo({ itemData }) {
 			</Link>
 			<ButtonAddOrder
 				hasAlreadyBeenOrdered={hasAlreadyBeenOrdered}
-				itemId={itemId}
+				itemId={_id}
 			/>
 		</div>
 	);

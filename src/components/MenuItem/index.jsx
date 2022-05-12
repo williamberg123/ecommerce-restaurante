@@ -7,13 +7,12 @@ import MenuItemInfo from '../../containers/MenuItemInfo';
 import './style.css';
 
 function MenuItem({
-	name, description, itemId, price, imageUrl, hasAlreadyBeenOrdered
+	menuname, description, _id, price, imageUrl, hasAlreadyBeenOrdered
 }) {
-	console.log('MENU ITEM RENDERIZOU');
 	const propsOfItemInfo = {
-		name,
+		menuname,
 		description,
-		itemId,
+		_id,
 		price,
 		imageUrl,
 		hasAlreadyBeenOrdered
@@ -29,9 +28,9 @@ function MenuItem({
 }
 
 MenuItem.propTypes = {
-	name: PropTypes.string.isRequired,
+	menuname: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
-	itemId: PropTypes.string.isRequired,
+	_id: PropTypes.string.isRequired,
 	price: PropTypes.string.isRequired,
 	imageUrl: PropTypes.string.isRequired,
 	hasAlreadyBeenOrdered: PropTypes.bool.isRequired

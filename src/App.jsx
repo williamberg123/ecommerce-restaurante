@@ -5,6 +5,7 @@ import AppRoutes from './routes';
 import AppContext from './AppContext';
 
 import loadAllMenu from './utils/fetchAllMenuData';
+import calcSum from './utils/calculateAccount';
 
 import './App.css';
 
@@ -13,9 +14,14 @@ export default function App() {
 	const [ allMenu, setAllMenu ] = useState([]);
 	const [ allOrders, setAllOrders ] = useState([]);
 	const [ baseUrl ] = useState('https://foodbukka.herokuapp.com/api/v1/menu');
+	const [ ordersCounter, setOrdersCounter ] = useState(0);
+	const [ accountValue, setAccountValue ] = useState(0);
 
 	const funcSetActuallyPage = useCallback((page) => {
 		setActuallyPage(page);
+		if (page === 'order') {
+			setOrdersCounter(0);
+		}
 	}, []);
 
 	const updateAllMenu = useCallback((item, itemIndex) => {
@@ -34,6 +40,7 @@ export default function App() {
 		copyOfOrders.push(order);
 
 		setAllOrders(copyOfOrders);
+		setOrdersCounter(ordersCounter + 1);
 	};
 
 	const removeOneOrder = (itemIndexInOrders) => {
@@ -97,11 +104,16 @@ export default function App() {
 		loadMenuAndPrice();
 	}, []);
 
+	useEffect(() => {
+		const sum = calcSum(allOrders);
+		setAccountValue(sum);
+	}, [allOrders]);
+
 	const memoizedContext = useMemo(
 		() => (
-			{ actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder }
+			{ actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder, ordersCounter, accountValue }
 		),
-		[actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder]
+		[actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder, ordersCounter, accountValue]
 	);
 
     return (

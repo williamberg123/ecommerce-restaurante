@@ -7,28 +7,13 @@ import MenuItem from '../../components/MenuItem';
 import './style.css';
 
 export default function MenuItems({ dataToBeShown }) {
-	const menuChildren = dataToBeShown.map((menuItem) => {
-		const {
-			menuname,
-			description,
-			_id,
-			price,
-			imageUrl,
-			hasAlreadyBeenOrdered
-		} = menuItem;
-
-		return (
+	const menuChildren = dataToBeShown.map((menuItem) => (
 			<MenuItem
-				key={_id}
-				itemId={_id}
-				name={menuname}
-				description={description}
-				price={price}
-				imageUrl={imageUrl}
-				hasAlreadyBeenOrdered={hasAlreadyBeenOrdered}
+				key={menuItem['_id']}
+				/* eslint-disable react/jsx-props-no-spreading */
+				{...menuItem}
 			/>
-		);
-	});
+		));
 
 	return (
 		<div className="MenuContainer-items">

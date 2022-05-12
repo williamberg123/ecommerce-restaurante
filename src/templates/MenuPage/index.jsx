@@ -16,7 +16,6 @@ export default function MenuPage({ funcOrder }) {
 			<MenuContainer
 				funcOrder={funcOrder}
 				title="cardápio disponível"
-				whichIconMustHave="check"
 			/>
 		</div>
 	);
