@@ -6,7 +6,6 @@ import AppContext from '../../AppContext';
 import './style.css';
 
 export default function NavBar() {
-	console.log('NAVBAR RENDERIZOU');
 	const { actuallyPage, funcSetActuallyPage, ordersCounter } = useContext(AppContext);
 
 	return (

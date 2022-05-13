@@ -1,6 +1,6 @@
 const calcSum = (allOrders) => {
 	const sum = allOrders.reduce((acc, order) => {
-		acc += Number(order.price);
+		acc += Number(order.price) * order.theAmount;
 		return acc;
 	}, 0);
 

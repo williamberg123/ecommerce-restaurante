@@ -93,11 +93,29 @@ export default function App() {
 		let menuAndPrice = await loadAllMenu(baseUrl);
 		menuAndPrice = removeDuplicateItems(menuAndPrice);
 		setAllMenu(menuAndPrice);
+	};
 
-		// const outDuplicate = removeDuplicateItems([...menuAndPrice]);
-		// for (let obj of outDuplicate) {
-		// 	console.log(obj.menuname);
-		// }
+	const setTheAmount = (action, _id) => {
+		const copyOfMenu = [...allMenu];
+		const copyOfOrders = [...allOrders];
+
+		const indexMenu = copyOfMenu.findIndex((obj) => obj['_id'] === _id);
+		const indexOrder = copyOfOrders?.findIndex((obj) => obj['_id'] === _id);
+
+		const theAmountMenu = copyOfMenu[indexMenu].theAmount;
+
+		if (theAmountMenu <= 1 && action === 'remove') return;
+		if (action === 'add') {
+			copyOfMenu[indexMenu].theAmount += 1;
+			if (indexOrder > -1) copyOfOrders[indexOrder].theAmount += 1;
+		}
+		if (action === 'remove') {
+			copyOfMenu[indexMenu].theAmount -= 1;
+			if (indexOrder > -1) copyOfOrders[indexOrder].theAmount -= 1;
+		}
+
+		setAllMenu(copyOfMenu);
+		setAllOrders(copyOfOrders);
 	};
 
 	useEffect(() => {
@@ -111,9 +129,9 @@ export default function App() {
 
 	const memoizedContext = useMemo(
 		() => (
-			{ actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder, ordersCounter, accountValue }
+			{ actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder, ordersCounter, accountValue, setTheAmount }
 		),
-		[actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder, ordersCounter, accountValue]
+		[ actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder, ordersCounter, accountValue, setTheAmount ]
 	);
 
     return (

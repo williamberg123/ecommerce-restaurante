@@ -12,7 +12,8 @@ const loadAllMenu = async (baseUrl) => {
 			...item,
 			price: randomPrice.toFixed(2),
 			imageUrl: item.images[randomIndex],
-			hasAlreadyBeenOrdered: false
+			hasAlreadyBeenOrdered: false,
+			theAmount: 1
 		};
 	});
 
