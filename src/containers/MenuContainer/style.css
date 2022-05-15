@@ -12,18 +12,8 @@
 	margin-right: auto;
 }
 
-.ContainerHeading {
-	display: flex;
-	align-items: center;
-	background-color: rgba(0, 0, 0, 0.7);
-	position: sticky;
-	top: 0;
-	padding: 20px;
-	z-index: 3;
-}
-
-.account-div {
-	color: white;
+.MenuItem-text {
+	padding-bottom: 10px;
 }
 
 @media (max-width: 500px) {

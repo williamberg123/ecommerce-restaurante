@@ -1,11 +1,15 @@
 .Header {
+	width: 1500px;
+	font-family: 'Poppins', sans-serif;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	align-items: center;
-	max-width: 1000px;
+	background-color: transparent;
+	width: 100%;
 	height: fit-content;
 	margin: 0 auto;
 	padding: 20px;
 	text-align: center;
+	z-index: 4;
 }

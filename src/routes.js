@@ -4,9 +4,12 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './templates/Home';
 import OrderPage from './templates/OrderPage';
 import MenuPage from './templates/MenuPage';
-import MenuItemPage from './templates/MenuItemPage';
+import AccountPage from './templates/AccountPage';
+import ErrorPage from './templates/ErrorPage';
 
 import AppContext from './AppContext';
+import ConfirmedPurchasePage from './templates/ConfirmationPage';
+import CancelPurchasePage from './templates/CancelPage';
 
 export default function AppRoutes() {
 	const { addOrder, removeOrder } = useContext(AppContext);
@@ -14,33 +17,31 @@ export default function AppRoutes() {
 	return (
 		<Routes>
 			<Route
+				index
 				path="/ecommerce-restaurante/"
-				element={(
-					<Home />
-				)}
+				element={<Home />}
 			/>
 			<Route
 				path="/ecommerce-restaurante/cardapio"
-				element={(
-					<MenuPage
-						funcOrder={addOrder}
-					/>
-				)}
-			/>
-			<Route
-				path="/ecommerce-restaurante/cardapio/:itemid"
-				element={(
-					<MenuItemPage />
-				)}
+				element={<MenuPage funcOrder={addOrder} />}
 			/>
 			<Route
 				path="/ecommerce-restaurante/pedidos"
-				element={(
-					<OrderPage
-						funcOrder={removeOrder}
-					/>
-				)}
+				element={<OrderPage funcOrder={removeOrder} />}
 			/>
+			<Route
+				path="/ecommerce-restaurante/conta"
+				element={<AccountPage />}
+			/>
+			<Route
+				path="/ecommerce-restaurante/confirm"
+				element={<ConfirmedPurchasePage />}
+			/>
+			<Route
+				path="/ecommerce-restaurante/cancel"
+				element={<CancelPurchasePage />}
+			/>
+			<Route path="*" element={ <ErrorPage /> } />
 		</Routes>
 	);
 }

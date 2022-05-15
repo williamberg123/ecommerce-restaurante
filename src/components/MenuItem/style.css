@@ -37,6 +37,11 @@
 	background-color: rgb(192, 36, 36);
 }
 
+.MenuItem button.deleteOrder:disabled {
+	background-color: rgb(206, 64, 64);
+	cursor: not-allowed;
+}
+
 .MenuItem input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
@@ -102,6 +107,10 @@ p.item-price span {
 	width: 25px;
 	height: 25px;
 	color: red;
+}
+
+.MenuItemConfig button:disabled {
+	cursor: not-allowed;
 }
 
 @media (max-width: 600px) {

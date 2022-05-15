@@ -3,7 +3,7 @@ const whichClassMustHave = (hasAlreadyBeenOrdered, actuallyPage) => {
 
 	if (hasAlreadyBeenOrdered && actuallyPage === 'menu') {
 		classMustHave = 'wasOrder';
-	} else if (actuallyPage === 'order') {
+	} else if (actuallyPage === 'order' || actuallyPage === 'account') {
 		classMustHave = 'deleteOrder';
 	} else {
 		classMustHave = 'noWasOrder';

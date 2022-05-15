@@ -8,7 +8,7 @@ import MenuContainerContext from '../../containers/MenuContainer/MenuContainerCo
 
 import whichClassMustHave from '../../utils/whichClassMustHave';
 
-export default function ButtonAddOrder({ hasAlreadyBeenOrdered, itemId }) {
+export default function OrderButton({ hasAlreadyBeenOrdered, itemId }) {
 	const [ iconsArray ] = useState({
 		wasOrder: <FaCheckCircle />,
 		noWasOrder: <FaPlusCircle />,
@@ -34,7 +34,7 @@ export default function ButtonAddOrder({ hasAlreadyBeenOrdered, itemId }) {
 	);
 }
 
-ButtonAddOrder.propTypes = {
+OrderButton.propTypes = {
 	hasAlreadyBeenOrdered: PropTypes.bool.isRequired,
 	itemId: PropTypes.string.isRequired
 };

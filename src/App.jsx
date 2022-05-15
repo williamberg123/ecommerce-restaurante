@@ -8,6 +8,9 @@ import loadAllMenu from './utils/fetchAllMenuData';
 import calcSum from './utils/calculateAccount';
 
 import './App.css';
+import NavBar from './components/NavBar';
+import Header from './components/Header';
+import RenderIf from './components/RenderIf';
 
 export default function App() {
 	const [ actuallyPage, setActuallyPage ] = useState('home');
@@ -16,6 +19,7 @@ export default function App() {
 	const [ baseUrl ] = useState('https://foodbukka.herokuapp.com/api/v1/menu');
 	const [ ordersCounter, setOrdersCounter ] = useState(0);
 	const [ accountValue, setAccountValue ] = useState(0);
+	const [ isClosedAccount, setIsClosedAccount ] = useState(false);
 
 	const funcSetActuallyPage = useCallback((page) => {
 		setActuallyPage(page);
@@ -95,12 +99,12 @@ export default function App() {
 		setAllMenu(menuAndPrice);
 	};
 
-	const setTheAmount = (action, _id) => {
+	const setTheAmount = useCallback((action, _id) => {
 		const copyOfMenu = [...allMenu];
 		const copyOfOrders = [...allOrders];
 
-		const indexMenu = copyOfMenu.findIndex((obj) => obj['_id'] === _id);
-		const indexOrder = copyOfOrders?.findIndex((obj) => obj['_id'] === _id);
+		const indexMenu = allMenu.findIndex((obj) => obj['_id'] === _id);
+		const indexOrder = allOrders?.findIndex((obj) => obj['_id'] === _id);
 
 		const theAmountMenu = copyOfMenu[indexMenu].theAmount;
 
@@ -116,6 +120,45 @@ export default function App() {
 
 		setAllMenu(copyOfMenu);
 		setAllOrders(copyOfOrders);
+	}, [allMenu, allOrders]);
+
+	const toCloseAccount = () => {
+		const copyOfOrders = [...allOrders];
+		const copyOfMenu = [...allMenu];
+
+		const closedOrders = copyOfOrders.map((order) => ({
+			...order, hasAlreadyBeenOrdered: true
+		}));
+
+		const closedMenu = copyOfMenu.map((menuItem) => ({
+			...menuItem, hasAlreadyBeenOrdered: true
+		}));
+
+		setIsClosedAccount(true);
+		setAllOrders(closedOrders);
+		setAllMenu(closedMenu);
+		setActuallyPage('account');
+	};
+
+	const toConfirmPurchase = () => {
+		const copyOfOrders = [...allOrders];
+		const copyOfMenu = [...allMenu];
+
+		const openedOrders = copyOfOrders.map((order) => ({
+			...order, hasAlreadyBeenOrdered: false
+		}));
+
+		const openedMenu = copyOfMenu.map((menuItem) => ({
+			...menuItem, hasAlreadyBeenOrdered: false
+		}));
+
+		setAllMenu(openedMenu);
+		setAllOrders(openedOrders);
+		setActuallyPage('error');
+	};
+
+	const toCancelPurchase = () => {
+
 	};
 
 	useEffect(() => {
@@ -129,13 +172,26 @@ export default function App() {
 
 	const memoizedContext = useMemo(
 		() => (
-			{ actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder, ordersCounter, accountValue, setTheAmount }
+			{
+				actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder,
+				ordersCounter, accountValue, setTheAmount, isClosedAccount, toCloseAccount,
+				toConfirmPurchase, toCancelPurchase
+			}
 		),
-		[ actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder, ordersCounter, accountValue, setTheAmount ]
+		[
+			actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder,
+			ordersCounter, accountValue, setTheAmount, isClosedAccount, toCloseAccount,
+			toConfirmPurchase, toCancelPurchase
+		]
 	);
 
     return (
 		<div className="App">
+			<RenderIf condition={ actuallyPage !== 'error' }>
+				<Header>
+					<NavBar actuallyPage={actuallyPage} funcSetActuallyPage={funcSetActuallyPage} ordersCounter={ordersCounter} />
+				</Header>
+			</RenderIf>
 			<AppContext.Provider value={memoizedContext}>
 				<AppRoutes />
 			</AppContext.Provider>

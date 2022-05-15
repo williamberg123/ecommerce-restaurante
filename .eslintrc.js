@@ -35,6 +35,7 @@ module.exports = {
 		'no-param-reassign': 'off',
 		'react/require-default-props': 'off',
 		'no-restricted-syntax': 'off',
-		'react/jsx-one-expression-per-line': 'off'
+		'react/jsx-one-expression-per-line': 'off',
+		'object-property-newline': 'off'
 	},
 };

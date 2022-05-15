@@ -1,22 +1,18 @@
-import React, { memo, useContext } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-
-import { FaPlus } from 'react-icons/fa';
 
 import MenuItemContainer from '../../containers/MenuItemContainer';
 import MenuItemInfo from '../../containers/ItemInfo';
 import Image from '../Image';
-import ButtonAddOrder from '../ButtonAddOrder';
-
-import AppContext from '../../AppContext';
+import ButtonOrder from '../OrderButton';
+import ButtonOfTheAmount from '../AmountButton';
+import RenderIf from '../RenderIf';
 
 import './style.css';
 
 function MenuItem({
-	menuname, description, _id, price, imageUrl, hasAlreadyBeenOrdered, theAmount
+	menuname, description, _id, price, imageUrl, hasAlreadyBeenOrdered, theAmount, isClosedAccount
 }) {
-	const { setTheAmount } = useContext(AppContext);
-
 	return (
 		<div className="MenuItem">
 			<MenuItemContainer>
@@ -31,23 +27,21 @@ function MenuItem({
 							</span>
 
 							<span className="MenuItemConfig">
-								<button disabled={hasAlreadyBeenOrdered} onClick={() => setTheAmount('remove', _id)} type="button">
-									-
-								</button>
+								<ButtonOfTheAmount _id={_id} buttonAction="removeOne" hasAlreadyBeenOrdered={hasAlreadyBeenOrdered} />
 
 								<input disabled={hasAlreadyBeenOrdered} type="number" value={theAmount} readOnly />
 
-								<button disabled={hasAlreadyBeenOrdered} onClick={() => setTheAmount('add', _id)} type="button">
-									<FaPlus />
-								</button>
+								<ButtonOfTheAmount _id={_id} buttonAction="addOne" hasAlreadyBeenOrdered={hasAlreadyBeenOrdered} />
 							</span>
 						</div>
 					</div>
 				</MenuItemInfo>
-				<ButtonAddOrder
-					hasAlreadyBeenOrdered={hasAlreadyBeenOrdered}
-					itemId={_id}
-				/>
+				<RenderIf condition={ !isClosedAccount }>
+					<ButtonOrder
+						hasAlreadyBeenOrdered={hasAlreadyBeenOrdered}
+						itemId={_id}
+					/>
+				</RenderIf>
 			</MenuItemContainer>
 		</div>
 	);
@@ -60,7 +54,8 @@ MenuItem.propTypes = {
 	price: PropTypes.string.isRequired,
 	imageUrl: PropTypes.string.isRequired,
 	hasAlreadyBeenOrdered: PropTypes.bool.isRequired,
-	theAmount: PropTypes.number.isRequired
+	theAmount: PropTypes.number.isRequired,
+	isClosedAccount: PropTypes.bool
 };
 
 export default memo(MenuItem);
