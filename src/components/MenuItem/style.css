@@ -70,7 +70,7 @@
 }
 
 .MenuItemContainer img {
-	border-radius: 10px 10px 0 0;
+	border-radius: 10px;
 	width: 100%;
 }
 
@@ -124,6 +124,5 @@ p.item-price span {
 
 	.MenuItem img {
 		width: 50%;
-		border-radius: 10px 0 0 0;
 	}
 }

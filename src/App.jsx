@@ -11,6 +11,7 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Header from './components/Header';
 import RenderIf from './components/RenderIf';
+import ShadowEffect from './components/ShadowEffect';
 
 export default function App() {
 	const [ actuallyPage, setActuallyPage ] = useState('home');
@@ -122,9 +123,15 @@ export default function App() {
 		setAllOrders(copyOfOrders);
 	}, [allMenu, allOrders]);
 
-	const toCloseAccount = () => {
+	const toCloseAccount = (e) => {
 		const copyOfOrders = [...allOrders];
 		const copyOfMenu = [...allMenu];
+
+		if (!copyOfOrders.length) {
+			e.preventDefault();
+			alert('Você não adicionou nenhum pedido');
+			return;
+		}
 
 		const closedOrders = copyOfOrders.map((order) => ({
 			...order, hasAlreadyBeenOrdered: true
@@ -140,7 +147,7 @@ export default function App() {
 		setActuallyPage('account');
 	};
 
-	const toConfirmPurchase = () => {
+	const toOpenMenuAndOrders = () => {
 		const copyOfOrders = [...allOrders];
 		const copyOfMenu = [...allMenu];
 
@@ -154,11 +161,16 @@ export default function App() {
 
 		setAllMenu(openedMenu);
 		setAllOrders(openedOrders);
-		setActuallyPage('error');
+	};
+
+	const toConfirmPurchase = () => {
+		toOpenMenuAndOrders();
+		setActuallyPage('confirm');
 	};
 
 	const toCancelPurchase = () => {
-
+		toOpenMenuAndOrders();
+		setActuallyPage('cancel');
 	};
 
 	useEffect(() => {
@@ -187,7 +199,7 @@ export default function App() {
 
     return (
 		<div className="App">
-			<RenderIf condition={ actuallyPage !== 'error' }>
+			<RenderIf condition={ actuallyPage !== 'error' && actuallyPage !== 'confirm' && actuallyPage !== 'cancel' }>
 				<Header>
 					<NavBar actuallyPage={actuallyPage} funcSetActuallyPage={funcSetActuallyPage} ordersCounter={ordersCounter} />
 				</Header>
@@ -195,6 +207,7 @@ export default function App() {
 			<AppContext.Provider value={memoizedContext}>
 				<AppRoutes />
 			</AppContext.Provider>
+			<ShadowEffect />
 		</div>
     );
 }

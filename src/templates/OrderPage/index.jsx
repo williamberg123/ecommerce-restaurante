@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import MenuContainer from '../../containers/MenuContainer';
 import HeadingContainer from '../../components/HeadingContainer';
-import ShadowEffect from '../../components/ShadowEffect';
 import RenderIf from '../../components/RenderIf';
 import MenuItems from '../../containers/MenuItems';
 
@@ -37,7 +36,6 @@ export default function OrderPage({ funcOrder }) {
 					</MenuContainerContext.Provider>
 				</RenderIf>
 			</MenuContainer>
-			<ShadowEffect />
 		</div>
 	);
 }

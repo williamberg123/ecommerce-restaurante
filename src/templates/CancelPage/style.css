@@ -1,12 +1,23 @@
-.cancel-div {
+.CancelPage {
 	width: 100%;
 	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: red;
-	color: white;
+}
+
+.cancel-div {
+	width: fit-content;
+	height: fit-content;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+	color: red;
+	padding: 10px;
+	border-radius: 10px;
 	font-weight: bold;
+	z-index: 3;
 }
 
 .cancel-div svg {
@@ -16,5 +27,5 @@
 }
 
 .cancel-div svg {
-	fill: white;
+	fill: red;
 }

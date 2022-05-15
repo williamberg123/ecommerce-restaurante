@@ -6,7 +6,6 @@ import MenuContainer from '../../containers/MenuContainer';
 import HeadingContainer from '../../components/HeadingContainer';
 import MenuItems from '../../containers/MenuItems';
 import RenderIf from '../../components/RenderIf';
-import ShadowEffect from '../../components/ShadowEffect';
 
 import AppContext from '../../AppContext';
 import MenuContainerContext from '../../containers/MenuContainer/MenuContainerContext';
@@ -36,7 +35,6 @@ export default function MenuPage({ funcOrder }) {
 					</MenuContainerContext.Provider>
 				</RenderIf>
 			</MenuContainer>
-			<ShadowEffect />
 		</div>
 	);
 }

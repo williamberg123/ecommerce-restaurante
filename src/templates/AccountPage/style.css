@@ -19,6 +19,7 @@
 .AccountPage .account-div p {
 	z-index: 3;
 	font-weight: bold;
+	color: orange;
 }
 
 .AccountPage .account-div a {
@@ -48,4 +49,17 @@
 
 .AccountPage .account-div a.cancel-purchase:hover {
 	background-color: red;
+}
+
+@media (max-width: 520px) {
+	.AccountPage .account-div {
+		flex-direction: column;
+		padding: 20px;
+	}
+
+	.AccountPage .account-div a {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 10px;
+	}
 }

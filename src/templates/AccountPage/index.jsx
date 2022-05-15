@@ -6,7 +6,6 @@ import RenderIf from '../../components/RenderIf';
 import MenuContainer from '../../containers/MenuContainer';
 import MenuItems from '../../containers/MenuItems';
 import AccountButton from '../../components/AccountButton';
-import ShadowEffect from '../../components/ShadowEffect';
 
 import AppContext from '../../AppContext';
 import MenuContainerContext from '../../containers/MenuContainer/MenuContainerContext';
@@ -44,7 +43,6 @@ export default function AccountPage({ funcOrder }) {
 					<AccountButton buttonClass="cancel-purchase" func={toCancelPurchase} buttonText="CANCELAR" />
 				</div>
 			</RenderIf>
-			<ShadowEffect />
 		</div>
 	);
 }
