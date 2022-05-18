@@ -13,7 +13,7 @@ import MenuContainerContext from '../../containers/MenuContainer/MenuContainerCo
 import './style.css';
 
 export default function OrderPage({ funcOrder }) {
-	const { actuallyPage, allOrders, accountValue, toCloseAccount } = useContext(AppContext);
+	const { actuallyPage, allOrders, accountValue } = useContext(AppContext);
 
 	const dataToBeShown = allOrders;
 
@@ -26,7 +26,6 @@ export default function OrderPage({ funcOrder }) {
 					title="seus pedidos"
 					actuallyPage={actuallyPage}
 					accountValue={accountValue}
-					toCloseAccount={toCloseAccount}
 				/>
 				<RenderIf condition={ dataToBeShown.length }>
 					<MenuContainerContext.Provider value={memoizedMenuContainerContext}>
@@ -34,6 +33,9 @@ export default function OrderPage({ funcOrder }) {
 							dataToBeShown={dataToBeShown}
 						/>
 					</MenuContainerContext.Provider>
+				</RenderIf>
+				<RenderIf condition={ !dataToBeShown.length }>
+					<p>Nenhum pedido</p>
 				</RenderIf>
 			</MenuContainer>
 		</div>

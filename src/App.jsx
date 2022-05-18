@@ -2,16 +2,19 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import AppRoutes from './routes';
 
-import AppContext from './AppContext';
-
-import loadAllMenu from './utils/fetchAllMenuData';
-import calcSum from './utils/calculateAccount';
-
-import './App.css';
 import NavBar from './components/NavBar';
 import Header from './components/Header';
 import RenderIf from './components/RenderIf';
 import ShadowEffect from './components/ShadowEffect';
+
+import AppContext from './AppContext';
+
+import loadAllMenu from './utils/fetchAllMenuData';
+import calcSum from './utils/calculateAccount';
+import mustRenderHeader from './utils/mustRenderHeader';
+import removeDuplicateItems from './utils/removeDuplicateItems';
+
+import './App.css';
 
 export default function App() {
 	const [ actuallyPage, setActuallyPage ] = useState('home');
@@ -29,76 +32,53 @@ export default function App() {
 		}
 	}, []);
 
-	const updateAllMenu = useCallback((item, itemIndex) => {
-		const copyOfAllMenu = [...allMenu];
+	const updateOneMenuItem = useCallback((item, itemIndex, copyOfAllMenu) => {
 		item.hasAlreadyBeenOrdered = !item.hasAlreadyBeenOrdered;
 
 		copyOfAllMenu[itemIndex] = item;
 		setAllMenu(copyOfAllMenu);
-	}, [allMenu]);
+	}, []);
 
-	const addNewOrder = (item) => {
-		const copyOfOrders = [ ...allOrders ];
+	const addNewOrder = useCallback((item, copyOfAllOrders) => {
+		const copyOfOrders = [ ...copyOfAllOrders ];
 		const order = { ...item };
 
 		order.hasAlreadyBeenOrdered = false;
 		copyOfOrders.push(order);
 
 		setAllOrders(copyOfOrders);
-		setOrdersCounter(ordersCounter + 1);
-	};
+		setOrdersCounter((lastState) => lastState + 1);
+	}, []);
 
-	const removeOneOrder = (itemIndexInOrders) => {
-		const copyOfOrders = [ ...allOrders ];
+	const removeOneOrder = useCallback((itemIndexInOrders, copyOfAllOrders) => {
+		const copyOfOrders = [ ...copyOfAllOrders ];
 		copyOfOrders.splice(itemIndexInOrders, 1);
 
 		setAllOrders(copyOfOrders);
-	};
+	}, []);
 
-	const addOrder = (e, menuItemId) => {
-		const copyOfAllMenu = [...allMenu];
-
+	const addOrder = useCallback((e, menuItemId, copyOfAllMenu, copyOfAllOrders) => {
 		const itemIndex = copyOfAllMenu.findIndex((item) => item['_id'] === menuItemId);
 		const item = copyOfAllMenu.find((item) => item['_id'] === menuItemId);
 
-		addNewOrder(item);
-		updateAllMenu(item, itemIndex, copyOfAllMenu);
-	};
+		addNewOrder(item, copyOfAllOrders);
+		updateOneMenuItem(item, itemIndex, copyOfAllMenu);
+	}, []);
 
-	const removeOrder = (e, menuItemId) => {
-		const copyOfAllMenu = [...allMenu];
-		const copyOfAllOrders = [...allOrders];
-
+	const removeOrder = useCallback((e, menuItemId, copyOfAllMenu, copyOfAllOrders) => {
 		const itemIndexInMenu = copyOfAllMenu.findIndex((item) => item['_id'] === menuItemId);
 		const itemIndexInOrders = copyOfAllOrders.findIndex((item) => item['_id'] === menuItemId);
 
 		const item = copyOfAllMenu.find((item) => item['_id'] === menuItemId);
 
-		removeOneOrder(itemIndexInOrders);
-		updateAllMenu(item, itemIndexInMenu, copyOfAllMenu);
-	};
+		removeOneOrder(itemIndexInOrders, copyOfAllOrders);
+		updateOneMenuItem(item, itemIndexInMenu, copyOfAllMenu);
+	}, []);
 
-	const removeDuplicateItems = (arrayOfObjects) => {
-		const copyOfArray = arrayOfObjects;
-
-		for (const obj of arrayOfObjects) {
-			copyOfArray.forEach((item, index) => {
-				if (!(index === arrayOfObjects.indexOf(obj))) {
-					if (obj.menuname === item.menuname) {
-						copyOfArray.splice(index, 1);
-					}
-				}
-			});
-		}
-
-		return copyOfArray;
-	};
-
-	const loadMenuAndPrice = async () => {
-		let menuAndPrice = await loadAllMenu(baseUrl);
-		menuAndPrice = removeDuplicateItems(menuAndPrice);
+	const loadMenuAndPrice = useCallback(async () => {
+		const menuAndPrice = removeDuplicateItems(await loadAllMenu(baseUrl));
 		setAllMenu(menuAndPrice);
-	};
+	}, []);
 
 	const setTheAmount = useCallback((action, _id) => {
 		const copyOfMenu = [...allMenu];
@@ -191,15 +171,14 @@ export default function App() {
 			}
 		),
 		[
-			actuallyPage, funcSetActuallyPage, allMenu, allOrders, addOrder, removeOrder,
-			ordersCounter, accountValue, setTheAmount, isClosedAccount, toCloseAccount,
-			toConfirmPurchase, toCancelPurchase
+			actuallyPage, allMenu, allOrders,
+			ordersCounter, accountValue, setTheAmount, isClosedAccount, toCloseAccount
 		]
 	);
 
     return (
 		<div className="App">
-			<RenderIf condition={ actuallyPage !== 'error' && actuallyPage !== 'confirm' && actuallyPage !== 'cancel' }>
+			<RenderIf condition={ mustRenderHeader(actuallyPage) }>
 				<Header>
 					<NavBar actuallyPage={actuallyPage} funcSetActuallyPage={funcSetActuallyPage} ordersCounter={ordersCounter} />
 				</Header>
@@ -207,7 +186,9 @@ export default function App() {
 			<AppContext.Provider value={memoizedContext}>
 				<AppRoutes />
 			</AppContext.Provider>
-			<ShadowEffect />
+			<RenderIf condition={ actuallyPage !== 'error' }>
+				<ShadowEffect />
+			</RenderIf>
 		</div>
     );
 }

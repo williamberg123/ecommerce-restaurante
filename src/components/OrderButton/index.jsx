@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { FaCheckCircle, FaWindowClose, FaPlusCircle } from 'react-icons/fa';
@@ -8,15 +8,20 @@ import MenuContainerContext from '../../containers/MenuContainer/MenuContainerCo
 
 import whichClassMustHave from '../../utils/whichClassMustHave';
 
-export default function OrderButton({ hasAlreadyBeenOrdered, itemId }) {
+function OrderButton({ hasAlreadyBeenOrdered, itemId }) {
+	console.log('BUTTON ORDER');
+
 	const [ iconsArray ] = useState({
 		wasOrder: <FaCheckCircle />,
 		noWasOrder: <FaPlusCircle />,
 		deleteOrder: <FaWindowClose />
 	});
 
-	const { actuallyPage } = useContext(AppContext);
+	const { actuallyPage, allMenu, allOrders } = useContext(AppContext);
 	const { funcOrder } = useContext(MenuContainerContext);
+
+	const copyOfAllMenu = [...allMenu];
+	const copyOfAllOrders = [...allOrders];
 
 	const classMustHave = whichClassMustHave(hasAlreadyBeenOrdered, actuallyPage);
 
@@ -25,7 +30,7 @@ export default function OrderButton({ hasAlreadyBeenOrdered, itemId }) {
 			className={classMustHave}
 			type="button"
 			disabled={hasAlreadyBeenOrdered}
-			onClick={(e) => funcOrder(e, itemId)}
+			onClick={(e) => funcOrder(e, itemId, copyOfAllMenu, copyOfAllOrders)}
 		>
 			{
 				iconsArray[classMustHave]
@@ -38,3 +43,5 @@ OrderButton.propTypes = {
 	hasAlreadyBeenOrdered: PropTypes.bool.isRequired,
 	itemId: PropTypes.string.isRequired
 };
+
+export default memo(OrderButton);

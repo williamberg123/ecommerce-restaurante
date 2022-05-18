@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { FaPlus } from 'react-icons/fa';
@@ -6,7 +6,7 @@ import RenderIf from '../RenderIf';
 
 import AppContext from '../../AppContext';
 
-export default function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
+function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
 	const { setTheAmount } = useContext(AppContext);
 
 	return (
@@ -30,3 +30,5 @@ ButtonOfTheAmount.propTypes = {
 	buttonAction: PropTypes.string.isRequired,
 	hasAlreadyBeenOrdered: PropTypes.bool.isRequired
 };
+
+export default memo(ButtonOfTheAmount);

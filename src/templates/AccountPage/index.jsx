@@ -19,6 +19,10 @@ export default function AccountPage({ funcOrder }) {
 
 	const memoizedContext = useMemo(() => ({ funcOrder }), [funcOrder]);
 
+	if (!isClosedAccount) {
+		window.location.href = '/ecommerce-restaurante/';
+	}
+
 	return (
 		<div className="AccountPage">
 			<RenderIf condition={ isClosedAccount }>
