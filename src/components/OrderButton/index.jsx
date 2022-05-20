@@ -9,8 +9,6 @@ import MenuContainerContext from '../../containers/MenuContainer/MenuContainerCo
 import whichClassMustHave from '../../utils/whichClassMustHave';
 
 function OrderButton({ hasAlreadyBeenOrdered, itemId }) {
-	console.log('BUTTON ORDER');
-
 	const [ iconsArray ] = useState({
 		wasOrder: <FaCheckCircle />,
 		noWasOrder: <FaPlusCircle />,
