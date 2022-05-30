@@ -1,5 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 
+import Loader from 'react-js-loader';
+
 import PropTypes from 'prop-types';
 
 import MenuContainer from '../../containers/MenuContainer';
@@ -27,6 +29,9 @@ export default function MenuPage({ funcOrder }) {
 					actuallyPage={actuallyPage}
 					accountValue={accountValue}
 				/>
+				<RenderIf condition={ !dataToBeShown.length }>
+					<Loader type="spinner-default" bgColor="#FFFFFF" size={70} />
+				</RenderIf>
 				<RenderIf condition={ dataToBeShown.length }>
 					<MenuContainerContext.Provider value={memoizedMenuContainerContext}>
 						<MenuItems
