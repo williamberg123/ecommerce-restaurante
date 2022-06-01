@@ -1,5 +1,4 @@
-import React, { useContext, useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 
 import HeadingContainer from '../../components/HeadingContainer';
 import RenderIf from '../../components/RenderIf';
@@ -8,16 +7,13 @@ import MenuItems from '../../containers/MenuItems';
 import AccountButton from '../../components/AccountButton';
 
 import AppContext from '../../AppContext';
-import MenuContainerContext from '../../containers/MenuContainer/MenuContainerContext';
 
 import './style.css';
 
-export default function AccountPage({ funcOrder }) {
-	const { actuallyPage, allOrders, accountValue, toCloseAccount, isClosedAccount, toConfirmPurchase, toCancelPurchase } = useContext(AppContext);
+export default function AccountPage() {
+	const { actuallyPage, orders, accountValue, toCloseAccount, isClosedAccount, toConfirmPurchase, toCancelPurchase } = useContext(AppContext);
 
-	const dataToBeShown = allOrders;
-
-	const memoizedContext = useMemo(() => ({ funcOrder }), [funcOrder]);
+	const dataToBeShown = orders;
 
 	if (!isClosedAccount) {
 		window.location.href = '/ecommerce-restaurante/';
@@ -34,11 +30,9 @@ export default function AccountPage({ funcOrder }) {
 						toCloseAccount={toCloseAccount}
 					/>
 					<RenderIf condition={ dataToBeShown.length }>
-						<MenuContainerContext.Provider value={memoizedContext}>
-							<MenuItems
-								dataToBeShown={dataToBeShown}
-							/>
-						</MenuContainerContext.Provider>
+						<MenuItems
+							dataToBeShown={dataToBeShown}
+						/>
 					</RenderIf>
 				</MenuContainer>
 				<div className="account-div">
@@ -50,7 +44,3 @@ export default function AccountPage({ funcOrder }) {
 		</div>
 	);
 }
-
-AccountPage.propTypes = {
-	funcOrder: PropTypes.func
-};

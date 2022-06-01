@@ -15,11 +15,8 @@ function OrderButton({ hasAlreadyBeenOrdered, itemId }) {
 		deleteOrder: <FaWindowClose />
 	});
 
-	const { actuallyPage, allMenu, allOrders } = useContext(AppContext);
-	const { funcOrder } = useContext(MenuContainerContext);
-
-	const copyOfAllMenu = [...allMenu];
-	const copyOfAllOrders = [...allOrders];
+	const { actuallyPage, ordersDispatch, orders, menuDispatch, menu } = useContext(AppContext);
+	const { type } = useContext(MenuContainerContext);
 
 	const classMustHave = whichClassMustHave(hasAlreadyBeenOrdered, actuallyPage);
 
@@ -28,7 +25,12 @@ function OrderButton({ hasAlreadyBeenOrdered, itemId }) {
 			className={classMustHave}
 			type="button"
 			disabled={hasAlreadyBeenOrdered}
-			onClick={(e) => funcOrder(e, itemId, copyOfAllMenu, copyOfAllOrders)}
+			onClick={
+				() => {
+					menuDispatch({ type, payload: { id: itemId } });
+					ordersDispatch({ type, payload: { id: itemId, menu, orders } });
+				}
+			}
 		>
 			{
 				iconsArray[classMustHave]

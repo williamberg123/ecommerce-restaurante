@@ -1,7 +1,5 @@
 import React, { useContext, useMemo } from 'react';
 
-import PropTypes from 'prop-types';
-
 import MenuContainer from '../../containers/MenuContainer';
 import HeadingContainer from '../../components/HeadingContainer';
 import RenderIf from '../../components/RenderIf';
@@ -12,12 +10,13 @@ import MenuContainerContext from '../../containers/MenuContainer/MenuContainerCo
 
 import './style.css';
 
-export default function OrderPage({ funcOrder }) {
-	const { actuallyPage, allOrders, accountValue } = useContext(AppContext);
+export default function OrderPage() {
+	const { actuallyPage, accountValue, orders } = useContext(AppContext);
 
-	const dataToBeShown = allOrders;
+	const dataToBeShown = orders;
+	const type = 'remove';
 
-	const memoizedMenuContainerContext = useMemo(() => ({ funcOrder }), [funcOrder]);
+	const memoizedMenuContainerContext = useMemo(() => ({ type }), []);
 
 	return (
 		<div className="OrderPage">
@@ -41,7 +40,3 @@ export default function OrderPage({ funcOrder }) {
 		</div>
 	);
 }
-
-OrderPage.propTypes = {
-	funcOrder: PropTypes.func.isRequired
-};

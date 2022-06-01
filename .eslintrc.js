@@ -37,6 +37,7 @@ module.exports = {
 		'no-restricted-syntax': 'off',
 		'react/jsx-one-expression-per-line': 'off',
 		'object-property-newline': 'off',
-		'no-alert': 'off'
+		'no-alert': 'off',
+		'no-confusing-arrow': 'off'
 	},
 };

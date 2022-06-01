@@ -2,8 +2,6 @@ import React, { useContext, useMemo } from 'react';
 
 import Loader from 'react-js-loader';
 
-import PropTypes from 'prop-types';
-
 import MenuContainer from '../../containers/MenuContainer';
 import HeadingContainer from '../../components/HeadingContainer';
 import MenuItems from '../../containers/MenuItems';
@@ -14,12 +12,13 @@ import MenuContainerContext from '../../containers/MenuContainer/MenuContainerCo
 
 import './style.css';
 
-export default function MenuPage({ funcOrder }) {
-	const { actuallyPage, allMenu, accountValue } = useContext(AppContext);
+export default function MenuPage() {
+	const { actuallyPage, accountValue, menu } = useContext(AppContext);
 
-	const dataToBeShown = allMenu;
+	const dataToBeShown = menu;
+	const type = 'add';
 
-	const memoizedMenuContainerContext = useMemo(() => ({ funcOrder }), [funcOrder]);
+	const memoizedMenuContainerContext = useMemo(() => ({ type }), []);
 
 	return (
 		<div className="MenuPage">
@@ -43,7 +42,3 @@ export default function MenuPage({ funcOrder }) {
 		</div>
 	);
 }
-
-MenuPage.propTypes = {
-	funcOrder: PropTypes.func.isRequired
-};

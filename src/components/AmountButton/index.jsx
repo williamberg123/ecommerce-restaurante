@@ -7,17 +7,33 @@ import RenderIf from '../RenderIf';
 import AppContext from '../../AppContext';
 
 function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
-	const { setTheAmount } = useContext(AppContext);
+	const { ordersDispatch, orders, menuDispatch, menu } = useContext(AppContext);
 
 	return (
 		<>
 			<RenderIf condition={ buttonAction === 'removeOne' }>
-				<button disabled={hasAlreadyBeenOrdered} onClick={() => setTheAmount('remove', _id)} type="button">
+				<button
+					disabled={hasAlreadyBeenOrdered}
+					onClick={
+						() => {
+							menuDispatch({ type: 'decreaseTheAmount', payload: { id: _id, menu } });
+							ordersDispatch({ type: 'decreaseTheAmount', payload: { id: _id, orders } });
+						}
+					}
+					type="button"
+				>
 					-
 				</button>
 			</RenderIf>
 			<RenderIf condition={ buttonAction === 'addOne' }>
-				<button disabled={hasAlreadyBeenOrdered} onClick={() => setTheAmount('add', _id)} type="button">
+				<button
+					disabled={hasAlreadyBeenOrdered}
+					onClick={() => {
+						menuDispatch({ type: 'increaseTheAmount', payload: { id: _id, menu } });
+						ordersDispatch({ type: 'increaseTheAmount', payload: { id: _id, orders } });
+					}}
+					type="button"
+				>
 					<FaPlus />
 				</button>
 			</RenderIf>
