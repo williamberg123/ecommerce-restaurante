@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 
 import MenuItem from '../../components/MenuItem';
 
+import { Context } from '../../contexts/AppContext';
+
 import './style.css';
-import AppContext from '../../AppContext';
 
 export default function MenuItems({ dataToBeShown }) {
-	const { isClosedAccount } = useContext(AppContext);
+	const { isClosedAccount } = useContext(Context);
 
 	const menuChildren = dataToBeShown.map((menuItem) => (
 		<MenuItem

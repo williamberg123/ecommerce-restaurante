@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 import './style.css';
 
-export default function MenuContainer({ children }) {
+export default function MainContainer({ children }) {
 	return (
-		<div className="MenuContainer">
+		<div className="MainContainer">
 			{children}
 		</div>
 	);
 }
 
-MenuContainer.propTypes = {
+MainContainer.propTypes = {
 	children: PropTypes.node.isRequired
 };

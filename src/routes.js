@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Home from './templates/Home';
@@ -7,13 +7,10 @@ import MenuPage from './templates/MenuPage';
 import AccountPage from './templates/AccountPage';
 import ErrorPage from './templates/ErrorPage';
 
-import AppContext from './AppContext';
 import ConfirmedPurchasePage from './templates/ConfirmationPage';
 import CancelPurchasePage from './templates/CancelPage';
 
 export default function AppRoutes() {
-	const { addOrder, removeOrder } = useContext(AppContext);
-
 	return (
 		<Routes>
 			<Route
@@ -23,11 +20,11 @@ export default function AppRoutes() {
 			/>
 			<Route
 				path="/ecommerce-restaurante/cardapio"
-				element={<MenuPage funcOrder={addOrder} />}
+				element={<MenuPage />}
 			/>
 			<Route
 				path="/ecommerce-restaurante/pedidos"
-				element={<OrderPage funcOrder={removeOrder} />}
+				element={<OrderPage />}
 			/>
 			<Route
 				path="/ecommerce-restaurante/conta"

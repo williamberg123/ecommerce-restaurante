@@ -1,22 +1,22 @@
-import React, { memo, useContext, useState } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { FaCheckCircle, FaWindowClose, FaPlusCircle } from 'react-icons/fa';
 
-import AppContext from '../../AppContext';
-import MenuContainerContext from '../../containers/MenuContainer/MenuContainerContext';
+import { Context } from '../../contexts/AppContext';
+import { MainContainerContext } from '../../contexts/MainContainerContext';
 
 import whichClassMustHave from '../../utils/whichClassMustHave';
 
 function OrderButton({ hasAlreadyBeenOrdered, itemId }) {
-	const [ iconsArray ] = useState({
+	const iconsArray = {
 		wasOrder: <FaCheckCircle />,
 		noWasOrder: <FaPlusCircle />,
 		deleteOrder: <FaWindowClose />
-	});
+	};
 
-	const { actuallyPage, ordersDispatch, orders, menuDispatch, menu } = useContext(AppContext);
-	const { type } = useContext(MenuContainerContext);
+	const { actuallyPage, ordersDispatch, orders, menuDispatch, menu } = useContext(Context);
+	const { type } = useContext(MainContainerContext);
 
 	const classMustHave = whichClassMustHave(hasAlreadyBeenOrdered, actuallyPage);
 

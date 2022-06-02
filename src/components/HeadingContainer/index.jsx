@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 
 import RenderIf from '../RenderIf';
 
-import AppContext from '../../AppContext';
+import { Context } from '../../contexts/AppContext';
 
 import './style.css';
 
 export default function HeadingContainer({ title, actuallyPage, accountValue }) {
-	const { toCloseAccount } = useContext(AppContext);
+	const { toCloseAccount } = useContext(Context);
 
 	return (
 		<div className="HeadingContainer">

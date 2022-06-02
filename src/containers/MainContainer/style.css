@@ -1,9 +1,9 @@
-.MenuContainer {
+.MainContainer {
 	display: flex;
 	flex-direction: column;
 }
 
-.MenuContainer h1 {
+.MainContainer h1 {
 	display: block;
 	text-align: left;
 	font-variant: small-caps;
@@ -17,7 +17,7 @@
 }
 
 @media (max-width: 500px) {
-	.MenuContainer h1 {
+	.MainContainer h1 {
 		font-size: 1.3rem;
 	}
 }

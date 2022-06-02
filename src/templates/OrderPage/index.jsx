@@ -1,42 +1,41 @@
 import React, { useContext, useMemo } from 'react';
 
-import MenuContainer from '../../containers/MenuContainer';
+import MainContainer from '../../containers/MainContainer';
 import HeadingContainer from '../../components/HeadingContainer';
 import RenderIf from '../../components/RenderIf';
-import MenuItems from '../../containers/MenuItems';
+import OrderItems from '../../containers/MenuItems';
 
-import AppContext from '../../AppContext';
-import MenuContainerContext from '../../containers/MenuContainer/MenuContainerContext';
+import { Context } from '../../contexts/AppContext';
+import ContainerContext from '../../contexts/MainContainerContext';
 
 import './style.css';
 
 export default function OrderPage() {
-	const { actuallyPage, accountValue, orders } = useContext(AppContext);
+	const { actuallyPage, accountValue, orders } = useContext(Context);
 
-	const dataToBeShown = orders;
 	const type = 'remove';
 
 	const memoizedMenuContainerContext = useMemo(() => ({ type }), []);
 
 	return (
 		<div className="OrderPage">
-			<MenuContainer>
+			<MainContainer>
 				<HeadingContainer
 					title="seus pedidos"
 					actuallyPage={actuallyPage}
 					accountValue={accountValue}
 				/>
-				<RenderIf condition={ dataToBeShown.length }>
-					<MenuContainerContext.Provider value={memoizedMenuContainerContext}>
-						<MenuItems
-							dataToBeShown={dataToBeShown}
+				<RenderIf condition={ orders.length }>
+					<ContainerContext value={memoizedMenuContainerContext}>
+						<OrderItems
+							dataToBeShown={orders}
 						/>
-					</MenuContainerContext.Provider>
+					</ContainerContext>
 				</RenderIf>
-				<RenderIf condition={ !dataToBeShown.length }>
+				<RenderIf condition={ !orders.length }>
 					<p>Nenhum pedido</p>
 				</RenderIf>
-			</MenuContainer>
+			</MainContainer>
 		</div>
 	);
 }

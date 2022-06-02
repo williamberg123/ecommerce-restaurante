@@ -2,18 +2,16 @@ import React, { useContext } from 'react';
 
 import HeadingContainer from '../../components/HeadingContainer';
 import RenderIf from '../../components/RenderIf';
-import MenuContainer from '../../containers/MenuContainer';
+import MainContainer from '../../containers/MainContainer';
 import MenuItems from '../../containers/MenuItems';
 import AccountButton from '../../components/AccountButton';
 
-import AppContext from '../../AppContext';
+import { Context } from '../../contexts/AppContext';
 
 import './style.css';
 
 export default function AccountPage() {
-	const { actuallyPage, orders, accountValue, toCloseAccount, isClosedAccount, toConfirmPurchase, toCancelPurchase } = useContext(AppContext);
-
-	const dataToBeShown = orders;
+	const { actuallyPage, orders, accountValue, toCloseAccount, isClosedAccount, toConfirmPurchase, toCancelPurchase } = useContext(Context);
 
 	if (!isClosedAccount) {
 		window.location.href = '/ecommerce-restaurante/';
@@ -22,19 +20,19 @@ export default function AccountPage() {
 	return (
 		<div className="AccountPage">
 			<RenderIf condition={ isClosedAccount }>
-				<MenuContainer>
+				<MainContainer>
 					<HeadingContainer
 						title="conta"
 						actuallyPage={actuallyPage}
 						accountValue={accountValue}
 						toCloseAccount={toCloseAccount}
 					/>
-					<RenderIf condition={ dataToBeShown.length }>
+					<RenderIf condition={ orders.length }>
 						<MenuItems
-							dataToBeShown={dataToBeShown}
+							dataToBeShown={orders}
 						/>
 					</RenderIf>
-				</MenuContainer>
+				</MainContainer>
 				<div className="account-div">
 					<p>Total: R$ {accountValue.toFixed(2)}</p>
 					<AccountButton buttonClass="confirm-purchase" func={toConfirmPurchase} buttonText="CONFIRMAR COMPRA" />

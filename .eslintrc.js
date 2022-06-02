@@ -38,6 +38,7 @@ module.exports = {
 		'react/jsx-one-expression-per-line': 'off',
 		'object-property-newline': 'off',
 		'no-alert': 'off',
-		'no-confusing-arrow': 'off'
+		'no-confusing-arrow': 'off',
+		'react/react-in-jsx-scope': 'off'
 	},
 };

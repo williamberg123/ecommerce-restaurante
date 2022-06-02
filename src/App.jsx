@@ -7,7 +7,7 @@ import Header from './components/Header';
 import RenderIf from './components/RenderIf';
 import ShadowEffect from './components/ShadowEffect';
 
-import AppContext from './AppContext';
+import AppContext from './contexts/AppContext';
 
 import loadAllMenu from './utils/fetchAllMenuData';
 import calcSum from './utils/calculateAccount';
@@ -102,9 +102,9 @@ export default function App() {
 				</Header>
 			</RenderIf>
 
-			<AppContext.Provider value={memoizedContext}>
+			<AppContext value={memoizedContext}>
 				<AppRoutes />
-			</AppContext.Provider>
+			</AppContext>
 
 			<RenderIf condition={ actuallyPage !== 'error' }>
 				<ShadowEffect />
