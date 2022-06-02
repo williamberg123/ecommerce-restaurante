@@ -1,17 +1,14 @@
 const removeDuplicateItems = (arrayOfObjects) => {
-	const copyOfArray = arrayOfObjects;
+	const outDuplicates = [];
 
 	for (const obj of arrayOfObjects) {
-		copyOfArray.forEach((item, index) => {
-			if (!(index === arrayOfObjects.indexOf(obj))) {
-				if (obj.menuname === item.menuname) {
-					copyOfArray.splice(index, 1);
-				}
-			}
-		});
+		const index = outDuplicates.findIndex(({ menuname }) => menuname === obj.menuname);
+		if (index === -1) {
+			outDuplicates.push(obj);
+		}
 	}
 
-	return copyOfArray;
+	return outDuplicates;
 };
 
 export default removeDuplicateItems;

@@ -37,6 +37,7 @@ export default function App() {
 
 	const loadMenuAndPrice = useCallback(async () => {
 		const menuAndPrice = removeDuplicateItems(await loadAllMenu(baseUrl));
+		console.log(menuAndPrice);
 		menuDispatch({ type: 'firstLoad', payload: { data: menuAndPrice } });
 	}, []);
 
