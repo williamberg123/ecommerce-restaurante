@@ -1,9 +1,9 @@
-import React, { memo, useContext } from 'react';
+import { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { FaCheckCircle, FaWindowClose, FaPlusCircle } from 'react-icons/fa';
 
-import { Context } from '../../contexts/AppContext';
+import Context from '../../contexts/AppProvider/context';
 import { MainContainerContext } from '../../contexts/MainContainerContext';
 
 import whichClassMustHave from '../../utils/whichClassMustHave';
@@ -15,7 +15,7 @@ function OrderButton({ hasAlreadyBeenOrdered, itemId }) {
 		deleteOrder: <FaWindowClose />
 	};
 
-	const { actuallyPage, ordersDispatch, orders, menuDispatch, menu } = useContext(Context);
+	const { actuallyPage, ordersDispatch, orders, menuDispatch, menu, setOrdersCounter } = useContext(Context);
 	const { type } = useContext(MainContainerContext);
 
 	const classMustHave = whichClassMustHave(hasAlreadyBeenOrdered, actuallyPage);
@@ -27,7 +27,7 @@ function OrderButton({ hasAlreadyBeenOrdered, itemId }) {
 			disabled={hasAlreadyBeenOrdered}
 			onClick={
 				() => {
-					menuDispatch({ type, payload: { id: itemId } });
+					menuDispatch({ type, payload: { id: itemId, setOrdersCounter } });
 					ordersDispatch({ type, payload: { id: itemId, menu, orders } });
 				}
 			}

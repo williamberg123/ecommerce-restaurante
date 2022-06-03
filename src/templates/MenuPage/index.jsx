@@ -7,7 +7,7 @@ import HeadingContainer from '../../components/HeadingContainer';
 import MenuItems from '../../containers/MenuItems';
 import RenderIf from '../../components/RenderIf';
 
-import { Context } from '../../contexts/AppContext';
+import Context from '../../contexts/AppProvider/context';
 import ContainerContext from '../../contexts/MainContainerContext';
 
 import './style.css';

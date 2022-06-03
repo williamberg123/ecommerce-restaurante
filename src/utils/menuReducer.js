@@ -7,6 +7,7 @@ const menuReducer = (state, action) => {
 		}
 
 		case 'add': {
+			action.payload.setOrdersCounter((c) => c + 1);
 			const updatedState = state.map(
 				(menuItem) => menuItem['_id'] === action.payload.id ? { ...menuItem, hasAlreadyBeenOrdered: true } : { ...menuItem }
 			);

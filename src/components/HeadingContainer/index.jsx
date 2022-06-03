@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import RenderIf from '../RenderIf';
 
-import { Context } from '../../contexts/AppContext';
+import Context from '../../contexts/AppProvider/context';
 
 import './style.css';
 

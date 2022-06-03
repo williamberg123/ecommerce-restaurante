@@ -1,9 +1,8 @@
-import { createContext } from 'react';
 import PropTypes from 'prop-types';
 
-export const Context = createContext();
+import Context from './context';
 
-export default function AppContext({ children, value }) {
+export default function AppProvider({ children, value }) {
 	return (
 		<Context.Provider value={value}>
 			{children}
@@ -11,7 +10,7 @@ export default function AppContext({ children, value }) {
 	);
 }
 
-AppContext.propTypes = {
+AppProvider.propTypes = {
 	children: PropTypes.node.isRequired,
 	value: PropTypes.instanceOf(Object).isRequired
 };

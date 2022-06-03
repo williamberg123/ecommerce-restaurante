@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useCallback, useMemo, useReducer } from 'react';
 
-import AppRoutes from './routes';
+import AppRoutes from '../../routes';
 
-import NavBar from './components/NavBar';
-import Header from './components/Header';
-import RenderIf from './components/RenderIf';
-import ShadowEffect from './components/ShadowEffect';
+import NavBar from '../../components/NavBar';
+import Header from '../../components/Header';
+import RenderIf from '../../components/RenderIf';
+import ShadowEffect from '../../components/ShadowEffect';
 
-import AppContext from './contexts/AppContext';
+import AppProvider from '../../contexts/AppProvider';
 
-import loadAllMenu from './utils/fetchAllMenuData';
-import calcSum from './utils/calculateAccount';
-import mustRenderHeader from './utils/mustRenderHeader';
+import loadAllMenu from '../../utils/fetchAllMenuData';
+import calcSum from '../../utils/calculateAccount';
+import mustRenderHeader from '../../utils/mustRenderHeader';
 
-import removeDuplicateItems from './utils/removeDuplicateItems';
-import menuReducer from './utils/menuReducer';
-import ordersReducer from './utils/ordersReducer';
+import removeDuplicateItems from '../../utils/removeDuplicateItems';
+import menuReducer from '../../utils/menuReducer';
+import ordersReducer from '../../utils/ordersReducer';
 
-import './App.css';
+import './styles.css';
 
 export default function App() {
 	const [ actuallyPage, setActuallyPage ] = useState('home');
@@ -86,7 +86,7 @@ export default function App() {
 			{
 				actuallyPage, funcSetActuallyPage, ordersCounter, accountValue, isClosedAccount,
 				toCloseAccount, toConfirmPurchase, toCancelPurchase, ordersDispatch, orders,
-				menuDispatch, menu
+				menuDispatch, menu, setOrdersCounter
 			}
 		),
 		[
@@ -103,9 +103,9 @@ export default function App() {
 				</Header>
 			</RenderIf>
 
-			<AppContext value={memoizedContext}>
+			<AppProvider value={memoizedContext}>
 				<AppRoutes />
-			</AppContext>
+			</AppProvider>
 
 			<RenderIf condition={ actuallyPage !== 'error' }>
 				<ShadowEffect />

@@ -6,7 +6,7 @@ import MainContainer from '../../containers/MainContainer';
 import MenuItems from '../../containers/MenuItems';
 import AccountButton from '../../components/AccountButton';
 
-import { Context } from '../../contexts/AppContext';
+import Context from '../../contexts/AppProvider/context';
 
 import './style.css';
 

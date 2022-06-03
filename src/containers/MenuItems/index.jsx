@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import MenuItem from '../../components/MenuItem';
 
-import { Context } from '../../contexts/AppContext';
+import Context from '../../contexts/AppProvider/context';
 
 import './style.css';
 

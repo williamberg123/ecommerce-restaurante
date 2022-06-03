@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FaPlus } from 'react-icons/fa';
 import RenderIf from '../RenderIf';
 
-import { Context } from '../../contexts/AppContext';
+import Context from '../../contexts/AppProvider/context';
 
 function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
 	const { ordersDispatch, orders, menuDispatch, menu } = useContext(Context);
