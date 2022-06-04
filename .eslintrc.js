@@ -39,6 +39,7 @@ module.exports = {
 		'object-property-newline': 'off',
 		'no-alert': 'off',
 		'no-confusing-arrow': 'off',
-		'react/react-in-jsx-scope': 'off'
+		'react/react-in-jsx-scope': 'off',
+		'default-case': 'off'
 	},
 };

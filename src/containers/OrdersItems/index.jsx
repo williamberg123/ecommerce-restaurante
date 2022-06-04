@@ -1,21 +1,19 @@
 import React, { useContext } from 'react';
-
-import MenuItem from '../../components/MenuItem';
+import OrderItem from '../../components/OrderItem';
+import OrdersContext from '../../contexts/OrdersProvider/context';
 import AppContext from '../../contexts/AppProvider/context';
-import MenuContext from '../../contexts/MenuProvider/context';
 
 import './style.css';
 
-export default function MenuItems() {
+export default function OrdersItems() {
+	const { orders } = useContext(OrdersContext);
 	const { isClosedAccount } = useContext(AppContext);
 
-	const { menu } = useContext(MenuContext);
-
-	const menuChildren = menu.map((menuItem) => (
-		<MenuItem
-			key={menuItem['_id']}
+	const menuChildren = orders.map((orderItem) => (
+		<OrderItem
+			key={orderItem['_id']}
 			/* eslint-disable react/jsx-props-no-spreading */
-			{...menuItem}
+			{...orderItem}
 			isClosedAccount={isClosedAccount}
 		/>
 	));

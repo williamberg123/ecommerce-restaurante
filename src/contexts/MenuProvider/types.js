@@ -1,0 +1,6 @@
+export const LOAD_MENU = 'LOAD_MENU';
+export const ADD_ORDER = 'ADD_ORDER';
+export const REMOVE_ORDER = 'REMOVE_ORDER';
+export const INCREMENT_AMOUNT = 'INCREMENT_AMOUNT';
+export const DECREMENT_AMOUNT = 'DECREMENT_AMOUNT';
+export const TO_CLOSE_MENU = 'TO_CLOSE_MENU';

@@ -4,10 +4,19 @@ import PropTypes from 'prop-types';
 import { FaPlus } from 'react-icons/fa';
 import RenderIf from '../RenderIf';
 
-import Context from '../../contexts/AppProvider/context';
+import MenuContext from '../../contexts/MenuProvider/context';
+import OrdersContext from '../../contexts/OrdersProvider/context';
+
+import {
+	incrementTheAmount as incrementTheAmountMenu,
+	decrementTheAmount as decrementTheAmountMenu
+} from '../../contexts/MenuProvider/actions';
+
+import { incrementOrderItem, decrementOrderItem } from '../../contexts/OrdersProvider/actions';
 
 function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
-	const { ordersDispatch, orders, menuDispatch, menu } = useContext(Context);
+	const { menuDispatch } = useContext(MenuContext);
+	const { ordersDispatch } = useContext(OrdersContext);
 
 	return (
 		<>
@@ -16,8 +25,8 @@ function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
 					disabled={hasAlreadyBeenOrdered}
 					onClick={
 						() => {
-							menuDispatch({ type: 'decreaseTheAmount', payload: { id: _id, menu } });
-							ordersDispatch({ type: 'decreaseTheAmount', payload: { id: _id, orders } });
+							decrementTheAmountMenu(menuDispatch, _id);
+							decrementOrderItem(ordersDispatch, _id);
 						}
 					}
 					type="button"
@@ -29,8 +38,8 @@ function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
 				<button
 					disabled={hasAlreadyBeenOrdered}
 					onClick={() => {
-						menuDispatch({ type: 'increaseTheAmount', payload: { id: _id, menu } });
-						ordersDispatch({ type: 'increaseTheAmount', payload: { id: _id, orders } });
+						incrementTheAmountMenu(menuDispatch, _id);
+						incrementOrderItem(ordersDispatch, _id);
 					}}
 					type="button"
 				>

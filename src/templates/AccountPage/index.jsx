@@ -3,19 +3,24 @@ import React, { useContext } from 'react';
 import HeadingContainer from '../../components/HeadingContainer';
 import RenderIf from '../../components/RenderIf';
 import MainContainer from '../../containers/MainContainer';
-import MenuItems from '../../containers/MenuItems';
 import AccountButton from '../../components/AccountButton';
+import OrdersItems from '../../containers/OrdersItems';
 
-import Context from '../../contexts/AppProvider/context';
+import AppContext from '../../contexts/AppProvider/context';
+import OrdersContext from '../../contexts/OrdersProvider/context';
 
 import './style.css';
+import calcSum from '../../utils/calculateAccount';
 
 export default function AccountPage() {
-	const { actuallyPage, orders, accountValue, toCloseAccount, isClosedAccount, toConfirmPurchase, toCancelPurchase } = useContext(Context);
+	const { actuallyPage, isClosedAccount, toConfirmPurchase, toCancelPurchase } = useContext(AppContext);
+	const { orders } = useContext(OrdersContext);
 
 	if (!isClosedAccount) {
 		window.location.href = '/ecommerce-restaurante/';
 	}
+
+	const accountValue = calcSum(orders);
 
 	return (
 		<div className="AccountPage">
@@ -25,12 +30,9 @@ export default function AccountPage() {
 						title="conta"
 						actuallyPage={actuallyPage}
 						accountValue={accountValue}
-						toCloseAccount={toCloseAccount}
 					/>
 					<RenderIf condition={ orders.length }>
-						<MenuItems
-							dataToBeShown={orders}
-						/>
+						<OrdersItems />
 					</RenderIf>
 				</MainContainer>
 				<div className="account-div">

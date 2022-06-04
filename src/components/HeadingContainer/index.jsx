@@ -5,12 +5,33 @@ import PropTypes from 'prop-types';
 
 import RenderIf from '../RenderIf';
 
-import Context from '../../contexts/AppProvider/context';
+import AppContext from '../../contexts/AppProvider/context';
+import MenuContext from '../../contexts/MenuProvider/context';
+import OrdersContext from '../../contexts/OrdersProvider/context';
+
+import { toCloseMenu } from '../../contexts/MenuProvider/actions';
+import { toCloseOrder } from '../../contexts/OrdersProvider/actions';
 
 import './style.css';
 
-export default function HeadingContainer({ title, actuallyPage, accountValue }) {
-	const { toCloseAccount } = useContext(Context);
+export default function HeadingContainer({ title, accountValue = 0 }) {
+	const { actuallyPage, setIsClosedAccount, funcSetActuallyPage } = useContext(AppContext);
+	const { orders, ordersDispatch } = useContext(OrdersContext);
+	const { menuDispatch } = useContext(MenuContext);
+
+	const toCloseAccount = (e) => {
+		if (!orders.length) {
+			e.preventDefault();
+			alert('Você não adicionou nenhum pedido');
+			return;
+		}
+
+		toCloseMenu(menuDispatch);
+		toCloseOrder(ordersDispatch);
+
+		setIsClosedAccount(true);
+		funcSetActuallyPage('account');
+	};
 
 	return (
 		<div className="HeadingContainer">
@@ -28,6 +49,5 @@ export default function HeadingContainer({ title, actuallyPage, accountValue }) 
 
 HeadingContainer.propTypes = {
 	title: PropTypes.string.isRequired,
-	actuallyPage: PropTypes.string.isRequired,
-	accountValue: PropTypes.number.isRequired
+	accountValue: PropTypes.number
 };

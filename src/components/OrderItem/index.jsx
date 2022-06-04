@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import MenuItemContainer from '../../containers/MenuItemContainer';
 import MenuItemInfo from '../../containers/ItemInfo';
 import Image from '../Image';
-import ButtonOrder from '../AddOrderButton';
+import RemoveOrderButton from '../RemoveOrderButton';
 import ButtonOfTheAmount from '../AmountButton';
 import RenderIf from '../RenderIf';
 
 import './style.css';
 
-function MenuItem({
+function OrderItem({
 	menuname, description, _id, price, imageUrl, hasAlreadyBeenOrdered, theAmount, isClosedAccount
 }) {
 	return (
@@ -37,7 +37,7 @@ function MenuItem({
 					</div>
 				</MenuItemInfo>
 				<RenderIf condition={ !isClosedAccount }>
-					<ButtonOrder
+					<RemoveOrderButton
 						hasAlreadyBeenOrdered={hasAlreadyBeenOrdered}
 						itemId={_id}
 					/>
@@ -47,7 +47,7 @@ function MenuItem({
 	);
 }
 
-MenuItem.propTypes = {
+OrderItem.propTypes = {
 	menuname: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
 	_id: PropTypes.string.isRequired,
@@ -58,4 +58,4 @@ MenuItem.propTypes = {
 	isClosedAccount: PropTypes.bool
 };
 
-export default memo(MenuItem);
+export default memo(OrderItem);
