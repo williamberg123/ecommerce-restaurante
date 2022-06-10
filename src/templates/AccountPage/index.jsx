@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import HeadingContainer from '../../components/HeadingContainer';
 import RenderIf from '../../components/RenderIf';
@@ -16,12 +17,15 @@ import './style.css';
 export default function AccountPage() {
 	const { actuallyPage, isClosedAccount, toConfirmPurchase, toCancelPurchase } = useContext(AppContext);
 	const { orders } = useContext(OrdersContext);
+	const navigate = useNavigate();
 
 	console.log(isClosedAccount, actuallyPage);
 
-	if (!isClosedAccount) {
-		window.location.href = '/ecommerce-restaurante/';
-	}
+	useEffect(() => {
+		if (!isClosedAccount) {
+			navigate('/ecommerce-restaurante/');
+		}
+	}, [navigate]);
 
 	const accountValue = calcSum(orders);
 
