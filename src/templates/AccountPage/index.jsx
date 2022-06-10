@@ -9,12 +9,15 @@ import OrdersItems from '../../containers/OrdersItems';
 import AppContext from '../../contexts/AppProvider/context';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
-import './style.css';
 import calcSum from '../../utils/calculateAccount';
+
+import './style.css';
 
 export default function AccountPage() {
 	const { actuallyPage, isClosedAccount, toConfirmPurchase, toCancelPurchase } = useContext(AppContext);
 	const { orders } = useContext(OrdersContext);
+
+	console.log(isClosedAccount, actuallyPage);
 
 	if (!isClosedAccount) {
 		window.location.href = '/ecommerce-restaurante/';
@@ -28,7 +31,6 @@ export default function AccountPage() {
 				<MainContainer>
 					<HeadingContainer
 						title="conta"
-						actuallyPage={actuallyPage}
 						accountValue={accountValue}
 					/>
 					<RenderIf condition={ orders.length }>

@@ -7,16 +7,9 @@ import RenderIf from '../RenderIf';
 import MenuContext from '../../contexts/MenuProvider/context';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
-import {
-	incrementTheAmount as incrementTheAmountMenu,
-	decrementTheAmount as decrementTheAmountMenu
-} from '../../contexts/MenuProvider/actions';
-
-import { incrementOrderItem, decrementOrderItem } from '../../contexts/OrdersProvider/actions';
-
 function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
-	const { menuDispatch } = useContext(MenuContext);
-	const { ordersDispatch } = useContext(OrdersContext);
+	const { menuActions } = useContext(MenuContext);
+	const { orderActions } = useContext(OrdersContext);
 
 	return (
 		<>
@@ -25,8 +18,8 @@ function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
 					disabled={hasAlreadyBeenOrdered}
 					onClick={
 						() => {
-							decrementTheAmountMenu(menuDispatch, _id);
-							decrementOrderItem(ordersDispatch, _id);
+							menuActions.decrementTheAmount(_id);
+							orderActions.decrementOrderItem(_id);
 						}
 					}
 					type="button"
@@ -38,8 +31,8 @@ function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
 				<button
 					disabled={hasAlreadyBeenOrdered}
 					onClick={() => {
-						incrementTheAmountMenu(menuDispatch, _id);
-						incrementOrderItem(ordersDispatch, _id);
+						menuActions.incrementTheAmount(_id);
+						orderActions.incrementOrderItem(_id);
 					}}
 					type="button"
 				>

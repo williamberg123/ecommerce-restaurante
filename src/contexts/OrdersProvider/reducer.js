@@ -3,7 +3,10 @@ import * as types from './types';
 const reducer = (state, action) => {
 	switch (action.type) {
 		case types.ADD_ORDER: {
-			return [...state, action.payload];
+			const { itemId, menu } = action.payload;
+			const order = menu.find(({ _id }) => _id === itemId);
+
+			return [...state, { ...order, hasAlreadyBeenOrdered: false }];
 		}
 
 		case types.REMOVE_ORDER: {

@@ -8,7 +8,13 @@ const reducer = (state, action) => {
 		}
 
 		case types.ADD_ORDER: {
-			return [...action.payload];
+			const { itemId } = action.payload;
+			const index = state.findIndex(({ _id }) => _id === itemId);
+
+			const updatedState = [...state];
+			updatedState[index].hasAlreadyBeenOrdered = true;
+
+			return [...updatedState];
 		}
 
 		case types.REMOVE_ORDER: {

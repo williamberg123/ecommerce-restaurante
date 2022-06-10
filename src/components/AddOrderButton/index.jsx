@@ -11,14 +11,11 @@ import OrdersContext from '../../contexts/OrdersProvider/context';
 
 import whichClassMustHave from '../../utils/whichClassMustHave';
 
-import { addOrder as updateMenuItem } from '../../contexts/MenuProvider/actions';
-import { addOrder } from '../../contexts/OrdersProvider/actions';
-
 function AddOrderButton({ hasAlreadyBeenOrdered, itemId }) {
 	const { actuallyPage, setOrdersCounter } = useContext(AppContext);
 
-	const { menuDispatch, menu } = useContext(MenuContext);
-	const { ordersDispatch } = useContext(OrdersContext);
+	const { menuActions, menu } = useContext(MenuContext);
+	const { orderActions } = useContext(OrdersContext);
 
 	const classMustHave = whichClassMustHave(hasAlreadyBeenOrdered, actuallyPage);
 
@@ -29,8 +26,8 @@ function AddOrderButton({ hasAlreadyBeenOrdered, itemId }) {
 			disabled={hasAlreadyBeenOrdered}
 			onClick={
 				() => {
-					updateMenuItem(menuDispatch, itemId, menu);
-					addOrder(ordersDispatch, itemId, menu);
+					menuActions.addOrder(itemId);
+					orderActions.addOrder(itemId, menu);
 					setOrdersCounter((c) => c + 1);
 				}
 			}

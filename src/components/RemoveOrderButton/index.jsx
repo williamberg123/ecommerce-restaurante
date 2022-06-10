@@ -3,20 +3,17 @@ import PropTypes from 'prop-types';
 
 import { FaWindowClose } from 'react-icons/fa';
 
-import Context from '../../contexts/AppProvider/context';
+import AppContext from '../../contexts/AppProvider/context';
+import MenuContext from '../../contexts/MenuProvider/context';
 
 import whichClassMustHave from '../../utils/whichClassMustHave';
-import MenuContext from '../../contexts/MenuProvider/context';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
-import { removeOrder } from '../../contexts/OrdersProvider/actions';
-import { removeOrder as updateMenuItem } from '../../contexts/MenuProvider/actions';
-
 function RemoveOrderButton({ hasAlreadyBeenOrdered, itemId }) {
-	const { actuallyPage } = useContext(Context);
+	const { actuallyPage } = useContext(AppContext);
 
-	const { menuDispatch } = useContext(MenuContext);
-	const { ordersDispatch } = useContext(OrdersContext);
+	const { menuActions } = useContext(MenuContext);
+	const { orderActions } = useContext(OrdersContext);
 
 	const classMustHave = whichClassMustHave(hasAlreadyBeenOrdered, actuallyPage);
 
@@ -27,8 +24,8 @@ function RemoveOrderButton({ hasAlreadyBeenOrdered, itemId }) {
 			disabled={hasAlreadyBeenOrdered}
 			onClick={
 				() => {
-					removeOrder(ordersDispatch, itemId);
-					updateMenuItem(menuDispatch, itemId);
+					orderActions.removeOrder(itemId);
+					menuActions.removeOrder(itemId);
 				}
 			}
 		>

@@ -40,6 +40,7 @@ module.exports = {
 		'no-alert': 'off',
 		'no-confusing-arrow': 'off',
 		'react/react-in-jsx-scope': 'off',
-		'default-case': 'off'
+		'default-case': 'off',
+		'arrow-body-style': 'off'
 	},
 };
