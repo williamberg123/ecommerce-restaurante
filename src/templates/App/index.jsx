@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
+import { CgMenuRound } from 'react-icons/cg';
 
 import AppRoutes from '../../routes';
 
@@ -16,13 +17,21 @@ import OrdersProvider from '../../contexts/OrdersProvider';
 import AppContext from '../../contexts/AppProvider/context';
 
 export default function App() {
-	const { actuallyPage, funcSetActuallyPage, ordersCounter } = useContext(AppContext);
+	const { actuallyPage, funcSetActuallyPage, ordersCounter, toggleNavBar } = useContext(AppContext);
+	const screenWidth = window.screen.width;
 
     return (
 		<div className="App">
 			<RenderIf condition={ mustRenderHeader(actuallyPage) }>
 				<Header>
-					<NavBar actuallyPage={actuallyPage} funcSetActuallyPage={funcSetActuallyPage} ordersCounter={ordersCounter} />
+					<NavBar
+						actuallyPage={actuallyPage}
+						funcSetActuallyPage={funcSetActuallyPage}
+						ordersCounter={ordersCounter}
+					/>
+					<RenderIf condition={ screenWidth <= 600 }>
+						<CgMenuRound onClick={toggleNavBar} />
+					</RenderIf>
 				</Header>
 			</RenderIf>
 
