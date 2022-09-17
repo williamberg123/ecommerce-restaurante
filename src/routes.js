@@ -1,14 +1,12 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Home from './templates/Home';
-import OrderPage from './templates/OrderPage';
-import MenuPage from './templates/MenuPage';
-import AccountPage from './templates/AccountPage';
-import ErrorPage from './templates/ErrorPage';
-
-import ConfirmedPurchasePage from './templates/ConfirmationPage';
-import CancelPurchasePage from './templates/CancelPage';
+import Home from './pages/Home';
+import OrderPage from './pages/OrderPage';
+import MenuPage from './pages/MenuPage';
+import AccountPage from './pages/AccountPage';
+import ErrorPage from './pages/ErrorPage';
+import ConfirmedPurchasePage from './pages/ConfirmationPage';
+import CancelPurchasePage from './pages/CancelPage';
 
 export default function AppRoutes() {
 	return (
@@ -38,7 +36,7 @@ export default function AppRoutes() {
 				path="/ecommerce-restaurante/cancel"
 				element={<CancelPurchasePage />}
 			/>
-			<Route path="*" element={ <ErrorPage /> } />
+			<Route path="*" element={<ErrorPage />} />
 		</Routes>
 	);
 }

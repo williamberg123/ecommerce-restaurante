@@ -5,7 +5,7 @@ import { FaCheckCircle, FaPlusCircle } from 'react-icons/fa';
 
 import RenderIf from '../RenderIf';
 
-import AppContext from '../../contexts/AppProvider/context';
+import { AppContext } from '../../contexts/AppProvider/context';
 import MenuContext from '../../contexts/MenuProvider/context';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
@@ -32,11 +32,11 @@ function AddOrderButton({ hasAlreadyBeenOrdered, itemId }) {
 				}
 			}
 		>
-			<RenderIf condition={ !hasAlreadyBeenOrdered }>
+			<RenderIf condition={!hasAlreadyBeenOrdered}>
 				<FaPlusCircle />
 			</RenderIf>
 
-			<RenderIf condition={ !!hasAlreadyBeenOrdered }>
+			<RenderIf condition={!!hasAlreadyBeenOrdered}>
 				<FaCheckCircle />
 			</RenderIf>
 		</button>

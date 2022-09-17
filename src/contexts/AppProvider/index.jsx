@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
 import { useCallback, useMemo, useRef, useState } from 'react';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
-import AppContext from './context';
+import { AppContext } from './context';
 
 export default function AppProvider({ children }) {
-	const [ actuallyPage, setActuallyPage ] = useState('home');
-	const [ ordersCounter, setOrdersCounter ] = useState(0);
-	const [ isClosedAccount, setIsClosedAccount ] = useState(false);
+	const [actuallyPage, setActuallyPage] = useState('home');
+	const [ordersCounter, setOrdersCounter] = useState(0);
+	const [isClosedAccount, setIsClosedAccount] = useState(false);
 
 	const ulRef = useRef(null);
 
-	const screenWidth = window.screen.width;
+	const isLessThan600px = useMediaQuery('(max-width: 600px)');
 
 	const toggleNavBar = useCallback(() => {
 		if (ulRef.current.style.display === 'none') {
@@ -21,11 +22,10 @@ export default function AppProvider({ children }) {
 	}, []);
 
 	const closeMenu = useCallback(() => {
-		if (screenWidth <= 600) ulRef.current.style.display = 'none';
-	}, [screenWidth]);
+		if (isLessThan600px) ulRef.current.style.display = 'none';
+	}, [isLessThan600px]);
 
 	const funcSetActuallyPage = useCallback((page) => {
-		console.log(page);
 		setActuallyPage(page);
 		closeMenu();
 		if (page === 'order') {

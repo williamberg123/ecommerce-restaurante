@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { FaWindowClose } from 'react-icons/fa';
 
-import AppContext from '../../contexts/AppProvider/context';
+import { AppContext } from '../../contexts/AppProvider/context';
 import MenuContext from '../../contexts/MenuProvider/context';
 
 import whichClassMustHave from '../../utils/whichClassMustHave';

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import MenuItem from '../../components/MenuItem';
-import AppContext from '../../contexts/AppProvider/context';
+import { AppContext } from '../../contexts/AppProvider/context';
 import MenuContext from '../../contexts/MenuProvider/context';
 
 import './style.css';

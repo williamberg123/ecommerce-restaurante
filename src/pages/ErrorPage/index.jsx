@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import AppContext from '../../contexts/AppProvider/context';
+import { AppContext } from '../../contexts/AppProvider/context';
 
 import './style.css';
 

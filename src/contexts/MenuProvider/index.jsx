@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
 import MenuContext from './context';
@@ -8,7 +8,7 @@ import buildActions from './buildActions';
 
 export default function MenuProvider({ children }) {
 	const [ menu, menuDispatch ] = useReducer(reducer, []);
-	const [ baseUrl ] = useState('https://foodbukka.herokuapp.com/api/v1/menu');
+	const baseUrl = 'https://foodbukka.herokuapp.com/api/v1/menu';
 
 	const menuActions = useCallback(buildActions(menuDispatch), []);
 

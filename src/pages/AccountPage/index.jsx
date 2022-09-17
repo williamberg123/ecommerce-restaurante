@@ -7,7 +7,7 @@ import MainContainer from '../../containers/MainContainer';
 import AccountButton from '../../components/AccountButton';
 import OrdersItems from '../../containers/OrdersItems';
 
-import AppContext from '../../contexts/AppProvider/context';
+import { AppContext } from '../../contexts/AppProvider/context';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
 import calcSum from '../../utils/calculateAccount';
@@ -15,11 +15,9 @@ import calcSum from '../../utils/calculateAccount';
 import './style.css';
 
 export default function AccountPage() {
-	const { actuallyPage, isClosedAccount, toConfirmPurchase, toCancelPurchase } = useContext(AppContext);
+	const { isClosedAccount, toConfirmPurchase, toCancelPurchase } = useContext(AppContext);
 	const { orders } = useContext(OrdersContext);
 	const navigate = useNavigate();
-
-	console.log(isClosedAccount, actuallyPage);
 
 	useEffect(() => {
 		if (!isClosedAccount) {
@@ -31,13 +29,13 @@ export default function AccountPage() {
 
 	return (
 		<div className="AccountPage">
-			<RenderIf condition={ isClosedAccount }>
+			<RenderIf condition={isClosedAccount}>
 				<MainContainer>
 					<HeadingContainer
 						title="conta"
 						accountValue={accountValue}
 					/>
-					<RenderIf condition={ orders.length }>
+					<RenderIf condition={orders.length}>
 						<OrdersItems />
 					</RenderIf>
 				</MainContainer>

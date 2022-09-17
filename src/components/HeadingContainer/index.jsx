@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import AppContext from '../../contexts/AppProvider/context';
+import { AppContext } from '../../contexts/AppProvider/context';
 import MenuContext from '../../contexts/MenuProvider/context';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
@@ -31,7 +31,7 @@ export default function HeadingContainer({ title, accountValue = 0 }) {
 	return (
 		<div className="HeadingContainer">
 			<h1>{title}</h1>
-			<RenderIf condition={ actuallyPage === 'order' }>
+			<RenderIf condition={actuallyPage === 'order'}>
 				<div className="account-div">
 					Total: R$
 					{accountValue.toFixed(2)}

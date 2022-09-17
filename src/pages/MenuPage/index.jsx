@@ -7,7 +7,7 @@ import HeadingContainer from '../../components/HeadingContainer';
 import MenuItems from '../../containers/MenuItems';
 import RenderIf from '../../components/RenderIf';
 
-import AppContext from '../../contexts/AppProvider/context';
+import { AppContext } from '../../contexts/AppProvider/context';
 
 import MenuContext from '../../contexts/MenuProvider/context';
 
@@ -24,10 +24,10 @@ export default function MenuPage() {
 					title="cardápio disponível"
 					actuallyPage={actuallyPage}
 				/>
-				<RenderIf condition={ !menu.length }>
+				<RenderIf condition={!menu.length}>
 					<Loader type="spinner-default" bgColor="#FFFFFF" size={70} />
 				</RenderIf>
-				<RenderIf condition={ menu.length }>
+				<RenderIf condition={menu.length}>
 					<MenuItems />
 				</RenderIf>
 			</MainContainer>

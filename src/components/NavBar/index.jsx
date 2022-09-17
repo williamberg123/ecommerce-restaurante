@@ -1,13 +1,11 @@
 import React, { memo, useContext } from 'react';
-import PropTypes from 'prop-types';
-
 import { NavLink } from 'react-router-dom';
 
+import { AppContext } from '../../contexts/AppProvider/context';
 import './style.css';
-import Context from '../../contexts/AppProvider/context';
 
-function NavBar({ actuallyPage, funcSetActuallyPage, ordersCounter }) {
-	const { ulRef } = useContext(Context);
+function NavBar() {
+	const { ulRef, actuallyPage, funcSetActuallyPage, ordersCounter } = useContext(AppContext);
 
 	return (
 		<nav className="NavBar">
@@ -32,11 +30,5 @@ function NavBar({ actuallyPage, funcSetActuallyPage, ordersCounter }) {
 		</nav>
 	);
 }
-
-NavBar.propTypes = {
-	actuallyPage: PropTypes.string.isRequired,
-	funcSetActuallyPage: PropTypes.func.isRequired,
-	ordersCounter: PropTypes.number.isRequired,
-};
 
 export default memo(NavBar);

@@ -41,6 +41,7 @@ module.exports = {
 		'no-confusing-arrow': 'off',
 		'react/react-in-jsx-scope': 'off',
 		'default-case': 'off',
-		'arrow-body-style': 'off'
+		'arrow-body-style': 'off',
+		'import/prefer-default-export': 'off',
 	},
 };

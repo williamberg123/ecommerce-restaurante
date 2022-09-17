@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import OrderItem from '../../components/OrderItem';
 import OrdersContext from '../../contexts/OrdersProvider/context';
-import AppContext from '../../contexts/AppProvider/context';
+import { AppContext } from '../../contexts/AppProvider/context';
 
 import './style.css';
 
