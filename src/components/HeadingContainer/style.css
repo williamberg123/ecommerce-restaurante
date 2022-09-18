@@ -8,6 +8,15 @@
 	z-index: 3;
 }
 
+.HeadingContainer h1 {
+	display: block;
+	text-align: left;
+	font-variant: small-caps;
+	color: red;
+	z-index: 3;
+	margin-right: auto;
+}
+
 .account-div {
 	color: white;
 	display: flex;

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -9,11 +9,18 @@ import OrdersContext from '../../contexts/OrdersProvider/context';
 import RenderIf from '../RenderIf';
 
 import './style.css';
+import calcSum from '../../utils/calculateAccount';
 
-export default function HeadingContainer({ title, accountValue = 0 }) {
+export default function HeadingContainer({ title }) {
+	const [ value, setValue ] = useState(0);
 	const { actuallyPage, setIsClosedAccount, funcSetActuallyPage } = useContext(AppContext);
 	const { orders, orderActions } = useContext(OrdersContext);
 	const { menuActions } = useContext(MenuContext);
+
+	useEffect(() => {
+		const newValue = calcSum(orders);
+		setValue(newValue);
+	}, [orders]);
 
 	const toCloseAccount = (e) => {
 		if (!orders.length) {
@@ -31,10 +38,11 @@ export default function HeadingContainer({ title, accountValue = 0 }) {
 	return (
 		<div className="HeadingContainer">
 			<h1>{title}</h1>
+
 			<RenderIf condition={actuallyPage === 'order'}>
 				<div className="account-div">
 					Total: R$
-					{accountValue.toFixed(2)}
+					{value.toFixed(2)}
 					<Link onClick={(e) => toCloseAccount(e)} to="/ecommerce-restaurante/conta">FECHAR CONTA</Link>
 				</div>
 			</RenderIf>
@@ -44,5 +52,4 @@ export default function HeadingContainer({ title, accountValue = 0 }) {
 
 HeadingContainer.propTypes = {
 	title: PropTypes.string.isRequired,
-	accountValue: PropTypes.number
 };

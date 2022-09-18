@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { FaWindowClose } from 'react-icons/fa';
@@ -9,7 +9,7 @@ import MenuContext from '../../contexts/MenuProvider/context';
 import whichClassMustHave from '../../utils/whichClassMustHave';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
-function RemoveOrderButton({ hasAlreadyBeenOrdered, itemId }) {
+export default function RemoveOrderButton({ hasAlreadyBeenOrdered, itemId }) {
 	const { actuallyPage } = useContext(AppContext);
 
 	const { menuActions } = useContext(MenuContext);
@@ -38,5 +38,3 @@ RemoveOrderButton.propTypes = {
 	hasAlreadyBeenOrdered: PropTypes.bool.isRequired,
 	itemId: PropTypes.string.isRequired
 };
-
-export default memo(RemoveOrderButton);

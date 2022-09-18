@@ -1,11 +1,5 @@
-import React, { memo } from 'react';
+import { Container } from './styles';
 
-import './style.css';
-
-function ShadowEffect() {
-	return (
-		<div className="shadow-effect" />
-	);
+export default function ShadowEffect() {
+	return <Container />;
 }
-
-export default memo(ShadowEffect);

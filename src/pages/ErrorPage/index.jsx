@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { AppContext } from '../../contexts/AppProvider/context';
 
-import './style.css';
+import { Container } from './styles';
 
 export default function ErrorPage() {
 	const { funcSetActuallyPage } = useContext(AppContext);
@@ -11,8 +11,8 @@ export default function ErrorPage() {
 	}, []);
 
 	return (
-		<div className="ErrorPage">
+		<Container>
 			<h1>Error: page not found</h1>
-		</div>
+		</Container>
 	);
 }

@@ -1,12 +1,14 @@
-.ConfirmationPage {
+import styled from 'styled-components';
+
+export const Container = styled.div`
 	width: 100%;
 	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
+`;
 
-.confirmation-div {
+export const ConfirmationDiv = styled.div`
 	width: fit-content;
 	height: fit-content;
 	display: flex;
@@ -18,14 +20,11 @@
 	border-radius: 10px;
 	font-weight: bolder;
 	z-index: 3;
-}
 
-.confirmation-div svg {
-	width: 50px;
-	height: 50px;
-	margin-right: 20px;
-}
-
-.confirmation-div svg {
-	fill: green;
-}
+	& svg {
+		width: 50px;
+		height: 50px;
+		margin-right: 20px;
+		fill: green;
+	}
+`;

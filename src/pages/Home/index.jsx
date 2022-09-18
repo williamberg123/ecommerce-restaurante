@@ -1,13 +1,11 @@
-import React from 'react';
+import { Container } from './styles';
 
 import Title from '../../components/Title';
 
-import './style.css';
-
 export default function Home() {
 	return (
-		<div className="Home">
+		<Container>
 			<Title />
-		</div>
+		</Container>
 	);
 }

@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 
-import './style.css';
+import { ConfirmationDiv, Container } from './styles';
 
 export default function ConfirmedPurchasePage() {
 	useEffect(() => {
 		setTimeout(() => {
-			window.location.href = '/ecommerce-restaurante/';
+			window.location.assign('/ecommerce-restaurante/');
 		}, 2000);
 	}, []);
 
 	return (
-		<div className="ConfirmationPage">
-			<div className="confirmation-div">
+		<Container>
+			<ConfirmationDiv>
 				<FaCheckCircle /> COMPRA CONFIRMADA <br />
-			</div>
-		</div>
+			</ConfirmationDiv>
+		</Container>
 	);
 }

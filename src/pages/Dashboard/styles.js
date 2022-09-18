@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import backgroundImage from '../../images/imagem-do-site.jpg';
+import backgroundImage from '../../assets/imagem-do-site.jpg';
 
 export const Container = styled.div`
 	max-width: 1500px;

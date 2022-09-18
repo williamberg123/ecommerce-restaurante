@@ -1,14 +1,14 @@
-import React, { memo, useContext } from 'react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { AppContext } from '../../contexts/AppProvider/context';
-import './style.css';
+import { Nav } from './styles';
 
-function NavBar() {
+export default function NavBar() {
 	const { ulRef, actuallyPage, funcSetActuallyPage, ordersCounter } = useContext(AppContext);
 
 	return (
-		<nav className="NavBar">
+		<Nav>
 			<ul ref={ulRef}>
 				<li><NavLink onClick={() => funcSetActuallyPage('home')} className={`${actuallyPage === 'home' ? 'actually-page' : ''}`} to="/ecommerce-restaurante/">HOME</NavLink></li>
 				<li><NavLink onClick={() => funcSetActuallyPage('menu')} className={`${actuallyPage === 'menu' ? 'actually-page' : ''}`} to="/ecommerce-restaurante/cardapio">CARDÁPIO</NavLink></li>
@@ -27,8 +27,6 @@ function NavBar() {
 					</NavLink>
 				</li>
 			</ul>
-		</nav>
+		</Nav>
 	);
 }
-
-export default memo(NavBar);

@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { FaWindowClose } from 'react-icons/fa';
-
-import './style.css';
+import { CancelDiv, Container } from './styles';
 
 export default function CancelPurchasePage() {
 	useEffect(() => {
 		setTimeout(() => {
-			window.location.href = '/ecommerce-restaurante/';
+			window.location.assign('/ecommerce-restaurante/');
 		}, 2000);
 	}, []);
 
 	return (
-		<div className="CancelPage">
-			<div className="cancel-div">
+		<Container>
+			<CancelDiv>
 				<FaWindowClose /> COMPRA CANCELADA
-			</div>
-		</div>
+			</CancelDiv>
+		</Container>
 	);
 }

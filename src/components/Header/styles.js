@@ -1,4 +1,6 @@
-.Header {
+import styled from 'styled-components';
+
+export const HeaderContainer = styled.header`
 	width: 1500px;
 	font-family: 'Poppins', sans-serif;
 	display: flex;
@@ -12,12 +14,12 @@
 	padding: 20px;
 	text-align: center;
 	z-index: 4;
-}
 
-.Header svg {
-	width: 50px;
-	height: 50px;
-	color: red;
-	z-index: 3;
-	margin-right: auto;
-}
+	& svg {
+		width: 50px;
+		height: 50px;
+		color: red;
+		z-index: 3;
+		margin-right: auto;
+	}
+`;

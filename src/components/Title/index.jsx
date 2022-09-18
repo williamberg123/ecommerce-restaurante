@@ -1,12 +1,10 @@
-import React from 'react';
-
-import './style.css';
+import { Container } from './styles';
 
 export default function Title() {
 	return (
-		<div className="Title">
+		<Container>
 			<h1>Berg</h1>
 			<h2>Bar e Restaurante</h2>
-		</div>
+		</Container>
 	);
 }
