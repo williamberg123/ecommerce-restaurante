@@ -23,4 +23,10 @@ export const HeaderContainer = styled.header`
 		z-index: 3;
 		margin-right: auto;
 	}
+
+	& a.actually-page {
+		color: rgb(255, 123, 0);
+		border-radius: 5px;
+		border: 1px solid rgb(255, 123, 0);
+	}
 `;

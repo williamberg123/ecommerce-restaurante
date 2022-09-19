@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Nav = styled.nav`
 	position: absolute;
@@ -6,6 +6,22 @@ export const Nav = styled.nav`
 	width: 100%;
 	height: 100vh;
 	top: 100%;
+	right: 100%;
+	display: none;
+
+	${({ isOpen, isFirstRender }) => {
+		return isOpen
+		? css`
+			display: block;
+			animation: 0.5s emerge ease;
+			right: 0;
+		`
+		: !isFirstRender && css`
+			display: block;
+			animation: 0.5s exit ease;
+			right: 100%;
+		`;
+	}}
 
 	& ul {
 		list-style: none;
@@ -61,6 +77,26 @@ export const Nav = styled.nav`
 			font-size: 0.5rem;
 			top: -5px;
 			right: -10px;
+		}
+	}
+
+	@keyframes emerge {
+		0% {
+			right: 100%;
+		}
+
+		100% {
+			right: 0;
+		}
+	}
+
+	@keyframes exit {
+		0% {
+			right: 0;
+		}
+
+		100% {
+			right: 100%;
 		}
 	}
 `;

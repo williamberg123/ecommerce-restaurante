@@ -14,10 +14,4 @@ export const GlobalStyles = createGlobalStyle`
 	a {
 		text-decoration: none;
 	}
-
-	a.actually-page {
-		color: rgb(255, 123, 0);
-		border-radius: 5px;
-		border: 1px solid rgb(255, 123, 0);
-	}
 `;

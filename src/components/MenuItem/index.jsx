@@ -38,6 +38,7 @@ export default function MenuItem(props) {
 						</div>
 					</div>
 				</MenuItemInfo>
+
 				<RenderIf condition={ !isClosedAccount }>
 					<ButtonOrder
 						hasAlreadyBeenOrdered={hasAlreadyBeenOrdered}

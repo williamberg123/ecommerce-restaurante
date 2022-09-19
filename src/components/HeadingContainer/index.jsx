@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { AppContext } from '../../contexts/AppProvider/context';
-import MenuContext from '../../contexts/MenuProvider/context';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
 import RenderIf from '../RenderIf';
@@ -13,9 +12,8 @@ import calcSum from '../../utils/calculateAccount';
 
 export default function HeadingContainer({ title }) {
 	const [ value, setValue ] = useState(0);
-	const { actuallyPage, setIsClosedAccount, funcSetActuallyPage } = useContext(AppContext);
-	const { orders, orderActions } = useContext(OrdersContext);
-	const { menuActions } = useContext(MenuContext);
+	const { actuallyPage, setIsClosedAccount, isClosedAccount } = useContext(AppContext);
+	const { orders } = useContext(OrdersContext);
 
 	useEffect(() => {
 		const newValue = calcSum(orders);
@@ -28,10 +26,7 @@ export default function HeadingContainer({ title }) {
 			alert('Você não adicionou nenhum pedido');
 			return;
 		}
-		menuActions.toCloseMenu();
-		orderActions.toCloseOrder();
 
-		funcSetActuallyPage('account');
 		setIsClosedAccount(true);
 	};
 
@@ -43,7 +38,13 @@ export default function HeadingContainer({ title }) {
 				<div className="account-div">
 					Total: R$
 					{value.toFixed(2)}
-					<Link onClick={(e) => toCloseAccount(e)} to="/ecommerce-restaurante/conta">FECHAR CONTA</Link>
+					<Link onClick={(e) => toCloseAccount(e)} to="/ecommerce-restaurante/pedidos/conta">
+						{
+							isClosedAccount
+							? 'CONFERIR CONTA'
+							: 'FECHAR CONTA'
+						}
+					</Link>
 				</div>
 			</RenderIf>
 		</div>

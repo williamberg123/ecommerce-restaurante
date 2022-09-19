@@ -1,9 +1,9 @@
 import { useContext } from 'react';
+import { Outlet } from 'react-router-dom';
 import Header from '../../components/Header';
 import RenderIf from '../../components/RenderIf';
 import ShadowEffect from '../../components/ShadowEffect';
 import { AppContext } from '../../contexts/AppProvider/context';
-import AppRoutes from '../../routes';
 import mustRenderHeader from '../../utils/mustRenderHeader';
 import { Container } from './styles';
 
@@ -16,7 +16,7 @@ export default function Dashboard() {
 				<Header />
 			</RenderIf>
 
-			<AppRoutes />
+			<Outlet />
 
 			<RenderIf condition={actuallyPage !== 'error'}>
 				<ShadowEffect />

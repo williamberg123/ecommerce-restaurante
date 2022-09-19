@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 	width: 100%;
-	min-height: 100vh;
 	position: relative;
 	font-family: 'Poppins', sans-serif;
 	text-align: center;
@@ -62,14 +61,6 @@ export const AccountDiv = styled.div`
 		background-color: rgb(0, 172, 0);
 	}
 
-	& a.cancel-purchase {
-		background-color: rgba(255, 255, 255, 0.164);
-	}
-
-	& a.cancel-purchase:hover {
-		background-color: red;
-	}
-
 	@media (max-width: 520px) {
 		flex-direction: column;
 		padding: 20px;
@@ -79,5 +70,29 @@ export const AccountDiv = styled.div`
 			padding: 12px 20px;
 			margin: 10px;
 		}
+	}
+`;
+
+export const CancelPurchaseButton = styled.button`
+	font-size: 0.8rem;
+	font-weight: bold;
+	padding: 15px 30px;
+	border: none;
+	border-radius: 2px;
+	z-index: 5;
+	margin-left: 20px;
+	color: white;
+	cursor: pointer;
+	transition: 0.2s;
+	background-color: rgba(255, 255, 255, 0.164);
+
+	&:hover {
+		background-color: red;
+	}
+
+	@media (max-width: 520px) {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 10px;
 	}
 `;

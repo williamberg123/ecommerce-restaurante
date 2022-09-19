@@ -1,17 +1,23 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import Loader from 'react-js-loader';
 
 import HeadingContainer from '../../components/HeadingContainer';
 import MenuItem from '../../components/MenuItem';
 import RenderIf from '../../components/RenderIf';
+import { AppContext } from '../../contexts/AppProvider/context';
 
 import MenuContext from '../../contexts/MenuProvider/context';
 
 import { Container, MenuItemsContainer } from './styles';
 
 export default function MenuPage() {
+	const { funcSetActuallyPage } = useContext(AppContext);
 	const { menu } = useContext(MenuContext);
+
+	useEffect(() => {
+		funcSetActuallyPage('menu');
+	}, []);
 
 	return (
 		<Container>
