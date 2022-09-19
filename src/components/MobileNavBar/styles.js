@@ -1,11 +1,25 @@
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
-	z-index: 2;
+	position: absolute;
+	z-index: 4;
+	width: 100%;
+	height: 100vh;
+	top: 100%;
 
 	& ul {
 		list-style: none;
 		display: flex;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		flex-direction: column;
+		justify-content: flex-start;
+		background-color: rgba(0, 0, 0, 1);
+	}
+
+	& li {
+		margin: 25px auto;
 	}
 
 	& a {
@@ -39,25 +53,6 @@ export const Nav = styled.nav`
 		font-size: 0.7rem;
 	}
 
-	@media (max-width: 600px) {
-		z-index: 4;
-
-		& ul {
-			display: none;
-			width: 100%;
-			height: 100%;
-			flex-direction: column;
-			justify-content: flex-start;
-			position: absolute;
-			top: 0;
-			left: 0;
-			background-color: rgba(0, 0, 0, 0.5);
-		}
-
-		& li {
-			margin: 25px auto;
-		}
-	}
 
 	@media (max-width: 500px){
 		.orders-counter {

@@ -3,14 +3,14 @@ import { useContext } from 'react';
 import HeadingContainer from '../../components/HeadingContainer';
 import RenderIf from '../../components/RenderIf';
 import AccountButton from '../../components/AccountButton';
-import OrdersItems from '../../containers/OrdersItems';
 
 import { AppContext } from '../../contexts/AppProvider/context';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
 import calcSum from '../../utils/calculateAccount';
 
-import { AccountDiv, Container } from './styles';
+import { AccountDiv, Container, OrderItemsContainer } from './styles';
+import OrderItem from '../../components/OrderItem';
 
 export default function AccountPage() {
 	const { toConfirmPurchase, toCancelPurchase } = useContext(AppContext);
@@ -24,7 +24,17 @@ export default function AccountPage() {
 				title="conta"
 			/>
 			<RenderIf condition={orders.length}>
-				<OrdersItems />
+				<OrderItemsContainer>
+					{
+						orders.map((item) => (
+							<OrderItem
+								key={item['_id']}
+								/* eslint-disable react/jsx-props-no-spreading */
+								{...item}
+							/>
+						))
+					}
+				</OrderItemsContainer>
 			</RenderIf>
 
 			<AccountDiv>

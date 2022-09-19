@@ -8,9 +8,29 @@ export const Container = styled.div`
 	text-align: center;
 `;
 
+export const OrderItemsContainer = styled.div`
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	grid-gap: 20px;
+	padding: 20px;
+
+	& a {
+		z-index: 2;
+	}
+
+	@media (max-width: 600px) {
+		grid-template-columns: repeat(1, 1fr);
+	}
+
+	@media (max-width: 500px) {
+		padding: 10px;
+	}
+`;
+
 export const AccountDiv = styled.div`
 	width: 100%;
 	display: flex;
+	align-items: center;
 	justify-content: center;
 	z-index: 4;
 	padding: 20px;

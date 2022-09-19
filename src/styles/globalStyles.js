@@ -15,7 +15,9 @@ export const GlobalStyles = createGlobalStyle`
 		text-decoration: none;
 	}
 
-	.actually-page {
-		border-bottom: 3px solid rgb(255, 136, 0);
+	a.actually-page {
+		color: rgb(255, 123, 0);
+		border-radius: 5px;
+		border: 1px solid rgb(255, 123, 0);
 	}
 `;

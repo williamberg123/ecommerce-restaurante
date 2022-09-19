@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
+	position: relative;
 	width: 1500px;
 	font-family: 'Poppins', sans-serif;
 	display: flex;

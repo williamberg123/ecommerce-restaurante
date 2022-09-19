@@ -2,12 +2,12 @@ import { useContext } from 'react';
 
 import { MdRestaurantMenu } from 'react-icons/md';
 import HeadingContainer from '../../components/HeadingContainer';
+import OrderItem from '../../components/OrderItem';
 import RenderIf from '../../components/RenderIf';
-import OrderItems from '../../containers/OrdersItems';
 
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
-import { Container } from './styles';
+import { Container, OrderItemsContainer } from './styles';
 
 export default function OrderPage() {
 	const { orders } = useContext(OrdersContext);
@@ -18,8 +18,18 @@ export default function OrderPage() {
 				title="seus pedidos"
 			/>
 
-			<RenderIf condition={orders.length}>
-				<OrderItems />
+			<RenderIf condition={ !!orders.length }>
+				<OrderItemsContainer>
+					{
+						orders.map((item) => (
+							<OrderItem
+								key={item['_id']}
+								/* eslint-disable react/jsx-props-no-spreading */
+								{...item}
+							/>
+						))
+					}
+				</OrderItemsContainer>
 			</RenderIf>
 
 			<RenderIf condition={!orders.length}>

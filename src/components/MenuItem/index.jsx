@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import MenuItemContainer from '../../containers/MenuItemContainer';
@@ -9,10 +9,12 @@ import ButtonOfTheAmount from '../AmountButton';
 import RenderIf from '../RenderIf';
 
 import './style.css';
+import { AppContext } from '../../contexts/AppProvider/context';
 
-function MenuItem({
-	menuname, description, _id, price, imageUrl, hasAlreadyBeenOrdered, theAmount, isClosedAccount
-}) {
+export default function MenuItem(props) {
+	const { menuname, description, _id, price, imageUrl, hasAlreadyBeenOrdered, theAmount } = props;
+	const { isClosedAccount } = useContext(AppContext);
+
 	return (
 		<div className="MenuItem">
 			<MenuItemContainer>
@@ -55,7 +57,4 @@ MenuItem.propTypes = {
 	imageUrl: PropTypes.string.isRequired,
 	hasAlreadyBeenOrdered: PropTypes.bool.isRequired,
 	theAmount: PropTypes.number.isRequired,
-	isClosedAccount: PropTypes.bool
 };
-
-export default memo(MenuItem);
