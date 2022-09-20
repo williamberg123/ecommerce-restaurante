@@ -1,21 +1,16 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
-
+import { useDispatch } from 'react-redux';
 import { FaCheckCircle, FaPlusCircle } from 'react-icons/fa';
 
-import RenderIf from '../RenderIf';
-
 import { AppContext } from '../../contexts/AppProvider/context';
-import MenuContext from '../../contexts/MenuProvider/context';
-import OrdersContext from '../../contexts/OrdersProvider/context';
-
+import RenderIf from '../RenderIf';
 import whichClassMustHave from '../../utils/whichClassMustHave';
+import { addOrder } from '../../state/menu/menuSlice';
 
 export default function AddOrderButton({ hasAlreadyBeenOrdered, itemId }) {
 	const { actuallyPage, setOrdersCounter } = useContext(AppContext);
-
-	const { menuActions, menu } = useContext(MenuContext);
-	const { orderActions } = useContext(OrdersContext);
+	const dispatch = useDispatch();
 
 	const classMustHave = whichClassMustHave(hasAlreadyBeenOrdered, actuallyPage);
 
@@ -26,8 +21,7 @@ export default function AddOrderButton({ hasAlreadyBeenOrdered, itemId }) {
 			disabled={hasAlreadyBeenOrdered}
 			onClick={
 				() => {
-					menuActions.addOrder(itemId);
-					orderActions.addOrder(itemId, menu);
+					dispatch(addOrder({ itemId }));
 					setOrdersCounter((c) => c + 1);
 				}
 			}

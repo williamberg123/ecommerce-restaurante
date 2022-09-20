@@ -43,5 +43,6 @@ module.exports = {
 		'default-case': 'off',
 		'arrow-body-style': 'off',
 		'import/prefer-default-export': 'off',
+		'consistent-return': 'off',
 	},
 };

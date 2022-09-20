@@ -1,9 +1,9 @@
+import { useSelector } from 'react-redux';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { AppContext } from '../../contexts/AppProvider/context';
-import OrdersContext from '../../contexts/OrdersProvider/context';
 
 import calcSum from '../../utils/calculateAccount';
 import { Container } from './styles';
@@ -12,7 +12,8 @@ import useMediaQuery from '../../hooks/useMediaQuery';
 export default function HeadingContainer({ title }) {
 	const [ value, setValue ] = useState(0);
 	const { setIsClosedAccount, isClosedAccount } = useContext(AppContext);
-	const { orders } = useContext(OrdersContext);
+
+	const orders = useSelector((state) => state.orders);
 	const isMobile = useMediaQuery('(max-width: 600px)');
 
 	useEffect(() => {

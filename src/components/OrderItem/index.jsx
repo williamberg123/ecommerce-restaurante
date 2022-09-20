@@ -26,16 +26,16 @@ export default function OrderItem(props) {
 							</span>
 
 							<MenuItemConfig as="span">
-								<ButtonOfTheAmount _id={_id} buttonAction="removeOne" hasAlreadyBeenOrdered={hasAlreadyBeenOrdered} />
+								<ButtonOfTheAmount _id={_id} buttonAction="removeOne" isDisabled={isClosedAccount} />
 
-								<input disabled={hasAlreadyBeenOrdered} type="number" value={theAmount} readOnly />
+								<input disabled={isClosedAccount} type="number" value={theAmount} readOnly />
 
-								<ButtonOfTheAmount _id={_id} buttonAction="addOne" hasAlreadyBeenOrdered={hasAlreadyBeenOrdered} />
+								<ButtonOfTheAmount _id={_id} buttonAction="addOne" isDisabled={isClosedAccount} />
 							</MenuItemConfig>
 						</MenuItemConfig>
 					</div>
 				</div>
-				<RenderIf condition={ !isClosedAccount }>
+				<RenderIf condition={!isClosedAccount}>
 					<RemoveOrderButton
 						hasAlreadyBeenOrdered={hasAlreadyBeenOrdered}
 						itemId={_id}
@@ -52,6 +52,6 @@ OrderItem.propTypes = {
 	_id: PropTypes.string.isRequired,
 	price: PropTypes.string.isRequired,
 	imageUrl: PropTypes.string.isRequired,
-	hasAlreadyBeenOrdered: PropTypes.bool.isRequired,
 	theAmount: PropTypes.number.isRequired,
+	hasAlreadyBeenOrdered: PropTypes.bool,
 };

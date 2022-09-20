@@ -26,11 +26,11 @@ export default function MenuItem(props) {
 							</span>
 
 							<MenuItemConfig as="span">
-								<ButtonOfTheAmount _id={_id} buttonAction="removeOne" hasAlreadyBeenOrdered={hasAlreadyBeenOrdered} />
+								<ButtonOfTheAmount _id={_id} buttonAction="removeOne" isDisabled={hasAlreadyBeenOrdered} />
 
-								<input disabled={hasAlreadyBeenOrdered} type="number" value={theAmount} readOnly />
+								<input disabled={hasAlreadyBeenOrdered || isClosedAccount} type="number" value={theAmount} readOnly />
 
-								<ButtonOfTheAmount _id={_id} buttonAction="addOne" hasAlreadyBeenOrdered={hasAlreadyBeenOrdered} />
+								<ButtonOfTheAmount _id={_id} buttonAction="addOne" isDisabled={hasAlreadyBeenOrdered} />
 							</MenuItemConfig>
 						</MenuItemConfig>
 					</div>

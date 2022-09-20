@@ -1,25 +1,21 @@
-import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { FaPlus } from 'react-icons/fa';
 import RenderIf from '../RenderIf';
+import { decrementTheAmount, incrementTheAmount } from '../../state/menu/menuSlice';
 
-import MenuContext from '../../contexts/MenuProvider/context';
-import OrdersContext from '../../contexts/OrdersProvider/context';
-
-export default function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
-	const { menuActions } = useContext(MenuContext);
-	const { orderActions } = useContext(OrdersContext);
+export default function ButtonOfTheAmount({ _id, buttonAction, isDisabled }) {
+	const dispatch = useDispatch();
 
 	return (
 		<>
-			<RenderIf condition={ buttonAction === 'removeOne' }>
+			<RenderIf condition={buttonAction === 'removeOne'}>
 				<button
-					disabled={hasAlreadyBeenOrdered}
+					disabled={isDisabled}
 					onClick={
 						() => {
-							menuActions.decrementTheAmount(_id);
-							orderActions.decrementOrderItem(_id);
+							dispatch(decrementTheAmount({ itemId: _id }));
 						}
 					}
 					type="button"
@@ -28,12 +24,11 @@ export default function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrd
 				</button>
 			</RenderIf>
 
-			<RenderIf condition={ buttonAction === 'addOne' }>
+			<RenderIf condition={buttonAction === 'addOne'}>
 				<button
-					disabled={hasAlreadyBeenOrdered}
+					disabled={isDisabled}
 					onClick={() => {
-						menuActions.incrementTheAmount(_id);
-						orderActions.incrementOrderItem(_id);
+						dispatch(incrementTheAmount({ itemId: _id }));
 					}}
 					type="button"
 				>
@@ -47,5 +42,5 @@ export default function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrd
 ButtonOfTheAmount.propTypes = {
 	_id: PropTypes.string.isRequired,
 	buttonAction: PropTypes.string.isRequired,
-	hasAlreadyBeenOrdered: PropTypes.bool.isRequired
+	isDisabled: PropTypes.bool.isRequired
 };
