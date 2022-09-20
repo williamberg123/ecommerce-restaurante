@@ -1,43 +1,40 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import MenuItemContainer from '../../containers/MenuItemContainer';
-import MenuItemInfo from '../../containers/ItemInfo';
-import Image from '../Image';
 import RemoveOrderButton from '../RemoveOrderButton';
 import ButtonOfTheAmount from '../AmountButton';
 import RenderIf from '../RenderIf';
 
-import './style.css';
 import { AppContext } from '../../contexts/AppProvider/context';
+import { Container, MenuItemConfig, MenuItemContainer } from '../MenuItem/styles';
 
 export default function OrderItem(props) {
 	const { menuname, description, _id, price, imageUrl, hasAlreadyBeenOrdered, theAmount } = props;
 	const { isClosedAccount } = useContext(AppContext);
 
 	return (
-		<div className="MenuItem">
+		<Container>
 			<MenuItemContainer>
-				<MenuItemInfo>
-					<Image imageUrl={imageUrl} altName={menuname} />
+				<div className="MenuItemInfo">
+					<img src={imageUrl} alt={menuname} />
 					<div className="MenuItem-text">
 						<h2>{menuname.toLowerCase()}</h2>
 						<p>{description}</p>
-						<div className="MenuItemConfig">
+						<MenuItemConfig>
 							<span id="item-value" className="item-value">
 								R$ {price}
 							</span>
 
-							<span className="MenuItemConfig">
+							<MenuItemConfig as="span">
 								<ButtonOfTheAmount _id={_id} buttonAction="removeOne" hasAlreadyBeenOrdered={hasAlreadyBeenOrdered} />
 
 								<input disabled={hasAlreadyBeenOrdered} type="number" value={theAmount} readOnly />
 
 								<ButtonOfTheAmount _id={_id} buttonAction="addOne" hasAlreadyBeenOrdered={hasAlreadyBeenOrdered} />
-							</span>
-						</div>
+							</MenuItemConfig>
+						</MenuItemConfig>
 					</div>
-				</MenuItemInfo>
+				</div>
 				<RenderIf condition={ !isClosedAccount }>
 					<RemoveOrderButton
 						hasAlreadyBeenOrdered={hasAlreadyBeenOrdered}
@@ -45,7 +42,7 @@ export default function OrderItem(props) {
 					/>
 				</RenderIf>
 			</MenuItemContainer>
-		</div>
+		</Container>
 	);
 }
 

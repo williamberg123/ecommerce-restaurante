@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { FaPlus } from 'react-icons/fa';
@@ -7,7 +7,7 @@ import RenderIf from '../RenderIf';
 import MenuContext from '../../contexts/MenuProvider/context';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
-function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
+export default function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
 	const { menuActions } = useContext(MenuContext);
 	const { orderActions } = useContext(OrdersContext);
 
@@ -27,6 +27,7 @@ function ButtonOfTheAmount({ _id, buttonAction, hasAlreadyBeenOrdered }) {
 					-
 				</button>
 			</RenderIf>
+
 			<RenderIf condition={ buttonAction === 'addOne' }>
 				<button
 					disabled={hasAlreadyBeenOrdered}
@@ -48,5 +49,3 @@ ButtonOfTheAmount.propTypes = {
 	buttonAction: PropTypes.string.isRequired,
 	hasAlreadyBeenOrdered: PropTypes.bool.isRequired
 };
-
-export default memo(ButtonOfTheAmount);

@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { FaCheckCircle, FaPlusCircle } from 'react-icons/fa';
@@ -11,7 +11,7 @@ import OrdersContext from '../../contexts/OrdersProvider/context';
 
 import whichClassMustHave from '../../utils/whichClassMustHave';
 
-function AddOrderButton({ hasAlreadyBeenOrdered, itemId }) {
+export default function AddOrderButton({ hasAlreadyBeenOrdered, itemId }) {
 	const { actuallyPage, setOrdersCounter } = useContext(AppContext);
 
 	const { menuActions, menu } = useContext(MenuContext);
@@ -47,5 +47,3 @@ AddOrderButton.propTypes = {
 	hasAlreadyBeenOrdered: PropTypes.bool.isRequired,
 	itemId: PropTypes.string.isRequired
 };
-
-export default memo(AddOrderButton);

@@ -7,8 +7,8 @@ import OrdersContext from '../../contexts/OrdersProvider/context';
 
 import RenderIf from '../RenderIf';
 
-import './style.css';
 import calcSum from '../../utils/calculateAccount';
+import { Container } from './styles';
 
 export default function HeadingContainer({ title }) {
 	const [ value, setValue ] = useState(0);
@@ -31,7 +31,7 @@ export default function HeadingContainer({ title }) {
 	};
 
 	return (
-		<div className="HeadingContainer">
+		<Container>
 			<h1>{title}</h1>
 
 			<RenderIf condition={actuallyPage === 'order'}>
@@ -47,7 +47,7 @@ export default function HeadingContainer({ title }) {
 					</Link>
 				</div>
 			</RenderIf>
-		</div>
+		</Container>
 	);
 }
 
