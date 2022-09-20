@@ -8,12 +8,15 @@ import RenderIf from '../../components/RenderIf';
 import { AppContext } from '../../contexts/AppProvider/context';
 
 import OrdersContext from '../../contexts/OrdersProvider/context';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 import { Container, OrderItemsContainer } from './styles';
 
 export default function OrderPage() {
 	const { funcSetActuallyPage } = useContext(AppContext);
 	const { orders } = useContext(OrdersContext);
+
+	const isMobile = useMediaQuery('(max-width: 600px)');
 
 	useEffect(() => {
 		funcSetActuallyPage('order');
@@ -23,6 +26,7 @@ export default function OrderPage() {
 		<Container>
 			<HeadingContainer
 				title="seus pedidos"
+				isMobile={isMobile}
 			/>
 
 			<RenderIf condition={ !!orders.length }>

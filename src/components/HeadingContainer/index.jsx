@@ -5,15 +5,15 @@ import PropTypes from 'prop-types';
 import { AppContext } from '../../contexts/AppProvider/context';
 import OrdersContext from '../../contexts/OrdersProvider/context';
 
-import RenderIf from '../RenderIf';
-
 import calcSum from '../../utils/calculateAccount';
 import { Container } from './styles';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 export default function HeadingContainer({ title }) {
 	const [ value, setValue ] = useState(0);
-	const { actuallyPage, setIsClosedAccount, isClosedAccount } = useContext(AppContext);
+	const { setIsClosedAccount, isClosedAccount } = useContext(AppContext);
 	const { orders } = useContext(OrdersContext);
+	const isMobile = useMediaQuery('(max-width: 600px)');
 
 	useEffect(() => {
 		const newValue = calcSum(orders);
@@ -31,22 +31,22 @@ export default function HeadingContainer({ title }) {
 	};
 
 	return (
-		<Container>
-			<h1>{title}</h1>
+		<Container isMobile={isMobile}>
+			{
+				!isMobile && <h1>{title}</h1>
+			}
 
-			<RenderIf condition={actuallyPage === 'order'}>
-				<div className="account-div">
-					Total: R$
-					{value.toFixed(2)}
-					<Link onClick={(e) => toCloseAccount(e)} to="/ecommerce-restaurante/pedidos/conta">
-						{
-							isClosedAccount
-							? 'CONFERIR CONTA'
-							: 'FECHAR CONTA'
-						}
-					</Link>
-				</div>
-			</RenderIf>
+			<div className="account-div">
+				Total: R$
+				{value.toFixed(2)}
+				<Link onClick={(e) => toCloseAccount(e)} to="/ecommerce-restaurante/pedidos/conta">
+					{
+						isClosedAccount
+						? 'CONFERIR CONTA'
+						: 'FECHAR CONTA'
+					}
+				</Link>
+			</div>
 		</Container>
 	);
 }

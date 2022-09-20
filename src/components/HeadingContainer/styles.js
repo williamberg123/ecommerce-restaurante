@@ -1,27 +1,40 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
 	display: flex;
 	align-items: center;
-	background-color: rgba(0, 0, 0, 0.7);
-	position: sticky;
-	top: 0;
 	padding: 20px;
 	z-index: 3;
 
+	${({ isMobile }) => isMobile && css`
+		padding-top: 90px;
+	`}
+
 	& h1 {
+		width: 100%;
 		display: block;
 		text-align: left;
 		font-variant: small-caps;
 		color: red;
 		z-index: 3;
 		margin-right: auto;
+		background-color: rgba(0, 0, 0, 0.7);
+		padding: 20px;
+		border-radius: 5px;
 	}
 
 	.account-div {
+		${({ isMobile }) => isMobile && css`
+			width: 100%;
+		`}
+
 		color: white;
+		font-weight: bold;
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
+		z-index: 3;
+		padding: 10px 0;
 	}
 
 	& .account-div a {
@@ -40,20 +53,12 @@ export const Container = styled.div`
 		transform: scale(1.02);
 	}
 
-	@media (max-width: 500px) {
-		& .account-div {
-			font-size: 0.8rem;
-		}
-
-		& .account-div a {
-			font-size: 0.6rem;
-			padding: 8px 12px;
-			margin-left: 10px;
-		}
-	}
-
 	@media (max-width: 400px) {
 		padding: 10px;
+
+		${({ isMobile }) => isMobile && css`
+			padding-top: 90px;
+		`}
 
 		& h1 {
 			font-size: 1.6rem;

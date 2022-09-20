@@ -9,7 +9,7 @@ import RenderIf from '../RenderIf';
 import { HeaderContainer } from './styles';
 
 export default function Header() {
-	const [ isMobileMenuOpen, setIsMobileMenuOpen ] = useState(false);
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const isMobile = useMediaQuery('(max-width: 600px)');
 	const isFirstRender = useRef(true);
 
@@ -19,7 +19,7 @@ export default function Header() {
 	}, []);
 
 	return (
-		<HeaderContainer>
+		<HeaderContainer isMobile={isMobile}>
 			<RenderIf condition={!isMobile}>
 				<NavBar />
 			</RenderIf>
@@ -29,8 +29,8 @@ export default function Header() {
 			</RenderIf>
 
 			<MobileNavBar
-				isFirstRender={ isFirstRender.current }
-				isOpen={ isMobile && isMobileMenuOpen }
+				isFirstRender={isFirstRender.current}
+				isOpen={isMobile && isMobileMenuOpen}
 				toggleMobileMenu={toggleMobileMenu}
 			/>
 		</HeaderContainer>

@@ -4,7 +4,7 @@ export const Nav = styled.nav`
 	position: absolute;
 	z-index: 4;
 	width: 100%;
-	height: 100vh;
+	height: calc(100vh - 90px);
 	top: 100%;
 	right: 100%;
 	display: none;
@@ -31,7 +31,7 @@ export const Nav = styled.nav`
 		height: 100%;
 		flex-direction: column;
 		justify-content: flex-start;
-		background-color: rgba(0, 0, 0, 1);
+		background-color: rgba(0, 0, 0, 0.8);
 	}
 
 	& li {

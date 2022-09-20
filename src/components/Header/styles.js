@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const HeaderContainer = styled.header`
 	position: relative;
@@ -15,6 +15,12 @@ export const HeaderContainer = styled.header`
 	padding: 20px;
 	text-align: center;
 	z-index: 4;
+
+	${({ isMobile }) => isMobile && css`
+		position: fixed;
+		top: 0;
+		background-color: rgba(0, 0, 0, 0.7);
+	`}
 
 	& svg {
 		width: 50px;

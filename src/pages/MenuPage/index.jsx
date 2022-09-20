@@ -2,7 +2,6 @@ import { useContext, useEffect } from 'react';
 
 import Loader from 'react-js-loader';
 
-import HeadingContainer from '../../components/HeadingContainer';
 import MenuItem from '../../components/MenuItem';
 import RenderIf from '../../components/RenderIf';
 import { AppContext } from '../../contexts/AppProvider/context';
@@ -21,9 +20,6 @@ export default function MenuPage() {
 
 	return (
 		<Container>
-			<HeadingContainer
-				title="cardápio disponível"
-			/>
 			<RenderIf condition={ !menu.length }>
 				<Loader type="spinner-default" bgColor="#FFFFFF" size={70} />
 			</RenderIf>
