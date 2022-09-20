@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const loadAllMenu = async (baseUrl) => {
-	const menuData = await axios.get(baseUrl);
+export const loadAllMenu = async () => {
+	const menuData = await axios.get('https://foodbukka.herokuapp.com/api/v1/menu');
 	const { Result } = menuData.data;
 
 	const menuAndPrice = Result.map((item) => {
@@ -19,5 +19,3 @@ const loadAllMenu = async (baseUrl) => {
 
 	return menuAndPrice;
 };
-
-export default loadAllMenu;

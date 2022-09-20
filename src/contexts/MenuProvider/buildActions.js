@@ -1,15 +1,15 @@
-import loadAllMenu from '../../utils/fetchAllMenuData';
+import { loadAllMenu } from '../../services/menuApi';
 import removeDuplicateItems from '../../utils/removeDuplicateItems';
 import * as types from './types';
 
 const buildActions = (dispatch) => {
-	const loadMenuFn = async (baseUrl) => {
-		const menuAndPrice = removeDuplicateItems(await loadAllMenu(baseUrl));
+	const loadMenuFn = async () => {
+		const menuAndPrice = removeDuplicateItems(await loadAllMenu());
 		dispatch({ type: types.LOAD_MENU, payload: menuAndPrice });
 	};
 
 	return {
-		loadMenu: (baseUrl) => loadMenuFn(baseUrl),
+		loadMenu: () => loadMenuFn(),
 		addOrder: (itemId) => dispatch({ type: types.ADD_ORDER, payload: { itemId } }),
 		removeOrder: (itemId) => dispatch({ type: types.REMOVE_ORDER, payload: { itemId } }),
 		incrementTheAmount: (itemId) => dispatch({ type: types.INCREMENT_AMOUNT, payload: { itemId } }),
