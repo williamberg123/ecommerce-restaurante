@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Dashboard from './pages/Dashboard';
@@ -9,10 +9,8 @@ import AccountPage from './pages/AccountPage';
 import ErrorPage from './pages/ErrorPage';
 import ConfirmedPurchasePage from './pages/ConfirmationPage';
 
-import { AppContext } from './contexts/AppProvider/context';
-
 export default function AppRoutes() {
-	const { isClosedAccount } = useContext(AppContext);
+	const { isClosedAccount } = useSelector((state) => state);
 
 	return (
 		<Routes>

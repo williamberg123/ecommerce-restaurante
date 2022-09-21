@@ -1,28 +1,23 @@
-import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { FaCheckCircle, FaPlusCircle } from 'react-icons/fa';
 
-import { AppContext } from '../../contexts/AppProvider/context';
 import RenderIf from '../RenderIf';
-import whichClassMustHave from '../../utils/whichClassMustHave';
-import { addOrder } from '../../state/menu/menuSlice';
+import { addOrder } from '../../state/reducers/menuSlice';
+import { addOne } from '../../state/reducers/ordersCounterSlice';
+import { Button } from './styles';
 
 export default function AddOrderButton({ hasAlreadyBeenOrdered, itemId }) {
-	const { actuallyPage, setOrdersCounter } = useContext(AppContext);
 	const dispatch = useDispatch();
 
-	const classMustHave = whichClassMustHave(hasAlreadyBeenOrdered, actuallyPage);
-
 	return (
-		<button
-			className={classMustHave}
+		<Button
 			type="button"
 			disabled={hasAlreadyBeenOrdered}
 			onClick={
 				() => {
 					dispatch(addOrder({ itemId }));
-					setOrdersCounter((c) => c + 1);
+					dispatch(addOne());
 				}
 			}
 		>
@@ -33,7 +28,7 @@ export default function AddOrderButton({ hasAlreadyBeenOrdered, itemId }) {
 			<RenderIf condition={!!hasAlreadyBeenOrdered}>
 				<FaCheckCircle />
 			</RenderIf>
-		</button>
+		</Button>
 	);
 }
 

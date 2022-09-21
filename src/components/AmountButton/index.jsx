@@ -2,40 +2,32 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { FaPlus } from 'react-icons/fa';
-import RenderIf from '../RenderIf';
-import { decrementTheAmount, incrementTheAmount } from '../../state/menu/menuSlice';
+import { decrementTheAmount, incrementTheAmount } from '../../state/reducers/menuSlice';
+import { Button } from './styles';
 
 export default function ButtonOfTheAmount({ _id, buttonAction, isDisabled }) {
 	const dispatch = useDispatch();
 
-	return (
-		<>
-			<RenderIf condition={buttonAction === 'removeOne'}>
-				<button
-					disabled={isDisabled}
-					onClick={
-						() => {
-							dispatch(decrementTheAmount({ itemId: _id }));
-						}
-					}
-					type="button"
-				>
-					-
-				</button>
-			</RenderIf>
+	const onClickFunc = () => {
+		if (buttonAction === 'removeOne') {
+			dispatch(decrementTheAmount({ itemId: _id }));
+		} else {
+			dispatch(incrementTheAmount({ itemId: _id }));
+		}
+	};
 
-			<RenderIf condition={buttonAction === 'addOne'}>
-				<button
-					disabled={isDisabled}
-					onClick={() => {
-						dispatch(incrementTheAmount({ itemId: _id }));
-					}}
-					type="button"
-				>
-					<FaPlus />
-				</button>
-			</RenderIf>
-		</>
+	return (
+		<Button
+			disabled={isDisabled}
+			onClick={onClickFunc}
+			type="button"
+		>
+			{
+				buttonAction === 'removeOne'
+					? '-'
+					: <FaPlus />
+			}
+		</Button>
 	);
 }
 

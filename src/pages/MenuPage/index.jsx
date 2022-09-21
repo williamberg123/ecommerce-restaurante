@@ -1,19 +1,19 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import Loader from 'react-js-loader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MenuItem from '../../components/MenuItem';
 import RenderIf from '../../components/RenderIf';
-import { AppContext } from '../../contexts/AppProvider/context';
+import { setActuallyPage } from '../../state/reducers/actuallyPageSlice';
 
 import { Container, MenuItemsContainer } from './styles';
 
 export default function MenuPage() {
-	const { funcSetActuallyPage } = useContext(AppContext);
 	const menu = useSelector((state) => state.menu);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		funcSetActuallyPage('menu');
+		dispatch(setActuallyPage('menu'));
 	}, []);
 
 	return (

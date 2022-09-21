@@ -1,19 +1,18 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { AppContext } from '../../contexts/AppProvider/context';
 
 import { Nav } from './styles';
 
 export default function NavBar() {
-	const { actuallyPage, ordersCounter } = useContext(AppContext);
+	const { page, ordersCounter } = useSelector((state) => state);
 
 	return (
 		<Nav>
 			<ul>
-				<li><NavLink className={`${actuallyPage === 'home' ? 'actually-page' : ''}`} to="/ecommerce-restaurante/">HOME</NavLink></li>
-				<li><NavLink className={`${actuallyPage === 'menu' ? 'actually-page' : ''}`} to="/ecommerce-restaurante/cardapio">CARDÁPIO</NavLink></li>
+				<li><NavLink className={`${page === 'home' ? 'actually-page' : ''}`} to="/ecommerce-restaurante/">HOME</NavLink></li>
+				<li><NavLink className={`${page === 'menu' ? 'actually-page' : ''}`} to="/ecommerce-restaurante/cardapio">CARDÁPIO</NavLink></li>
 				<li>
-					<NavLink className={`${actuallyPage === 'order' ? 'actually-page' : ''}`} to="/ecommerce-restaurante/pedidos">
+					<NavLink className={`${page === 'order' ? 'actually-page' : ''}`} to="/ecommerce-restaurante/pedidos">
 						SEUS PEDIDOS
 						{
 							!!ordersCounter && (

@@ -1,19 +1,19 @@
-import { useSelector } from 'react-redux';
-import { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import { AppContext } from '../../contexts/AppProvider/context';
 
 import calcSum from '../../utils/calculateAccount';
 import { Container } from './styles';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import { setIsClosedAccount } from '../../state/reducers/accountStateSlice';
 
 export default function HeadingContainer({ title }) {
-	const [ value, setValue ] = useState(0);
-	const { setIsClosedAccount, isClosedAccount } = useContext(AppContext);
+	const [value, setValue] = useState(0);
+	const { isClosedAccount } = useSelector((state) => state);
+	const dispatch = useDispatch();
 
-	const orders = useSelector((state) => state.orders);
+	const { orders } = useSelector((state) => state);
 	const isMobile = useMediaQuery('(max-width: 600px)');
 
 	useEffect(() => {
@@ -28,7 +28,7 @@ export default function HeadingContainer({ title }) {
 			return;
 		}
 
-		setIsClosedAccount(true);
+		dispatch(setIsClosedAccount(true));
 	};
 
 	return (
@@ -43,8 +43,8 @@ export default function HeadingContainer({ title }) {
 				<Link onClick={(e) => toCloseAccount(e)} to="/ecommerce-restaurante/pedidos/conta">
 					{
 						isClosedAccount
-						? 'CONFERIR CONTA'
-						: 'FECHAR CONTA'
+							? 'CONFERIR CONTA'
+							: 'FECHAR CONTA'
 					}
 				</Link>
 			</div>

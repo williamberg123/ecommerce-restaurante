@@ -3,13 +3,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppRoutes from './routes';
-import AppProvider from './contexts/AppProvider';
 
 import { GlobalStyles } from './styles/globalStyles';
-import { loadMenu, menuLoading } from './state/menu/menuSlice';
+import { loadMenu, menuLoading } from './state/reducers/menuSlice';
 import removeDuplicateItems from './utils/removeDuplicateItems';
 import { loadAllMenu } from './services/menuApi';
-import { getOrders } from './state/orders/ordersSlice';
+import { getOrders } from './state/reducers/ordersSlice';
 
 export default function App() {
 	const dispatch = useDispatch();
@@ -32,10 +31,8 @@ export default function App() {
 
 	return (
 		<BrowserRouter>
-			<AppProvider>
-				<AppRoutes />
-				<GlobalStyles />
-			</AppProvider>
+			<AppRoutes />
+			<GlobalStyles />
 		</BrowserRouter>
 	);
 }

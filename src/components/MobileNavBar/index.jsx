@@ -1,12 +1,11 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { AppContext } from '../../contexts/AppProvider/context';
 import { Nav } from './styles';
 
 export default function MobileNavBar({ isFirstRender, isOpen, toggleMobileMenu }) {
-	const { actuallyPage, ordersCounter } = useContext(AppContext);
+	const { actuallyPage, ordersCounter } = useSelector((state) => state);
 
 	return (
 		<Nav isFirstRender={isFirstRender} isOpen={isOpen}>

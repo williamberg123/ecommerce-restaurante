@@ -1,16 +1,15 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import RemoveOrderButton from '../RemoveOrderButton';
 import ButtonOfTheAmount from '../AmountButton';
 import RenderIf from '../RenderIf';
 
-import { AppContext } from '../../contexts/AppProvider/context';
 import { Container, MenuItemConfig, MenuItemContainer } from '../MenuItem/styles';
 
 export default function OrderItem(props) {
 	const { menuname, description, _id, price, imageUrl, hasAlreadyBeenOrdered, theAmount } = props;
-	const { isClosedAccount } = useContext(AppContext);
+	const { isClosedAccount } = useSelector((state) => state);
 
 	return (
 		<Container>

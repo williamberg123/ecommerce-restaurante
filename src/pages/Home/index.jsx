@@ -1,14 +1,15 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Container } from './styles';
 
 import Title from '../../components/Title';
-import { AppContext } from '../../contexts/AppProvider/context';
+import { setActuallyPage } from '../../state/reducers/actuallyPageSlice';
 
 export default function Home() {
-	const { funcSetActuallyPage } = useContext(AppContext);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		funcSetActuallyPage('home');
+		dispatch(setActuallyPage('home'));
 	}, []);
 
 	return (

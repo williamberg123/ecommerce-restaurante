@@ -1,13 +1,14 @@
-import { useContext, useEffect } from 'react';
-import { AppContext } from '../../contexts/AppProvider/context';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setActuallyPage } from '../../state/reducers/actuallyPageSlice';
 
 import { Container } from './styles';
 
 export default function ErrorPage() {
-	const { funcSetActuallyPage } = useContext(AppContext);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		funcSetActuallyPage('error');
+		dispatch(setActuallyPage('error'));
 	}, []);
 
 	return (

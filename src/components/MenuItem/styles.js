@@ -4,45 +4,6 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 
-	& button {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: white;
-		font-size: 1.1rem;
-		font-variant: small-caps;
-		font-weight: bold;
-		border: none;
-		border-radius: 5px;
-		padding: 10px;
-		margin: 3px;
-		cursor: pointer;
-		transition: 0.3s;
-		font-family: 'Roboto Condensed', sans-serif;
-	}
-
-	& button.noWasOrder {
-		background-color: rgb(70, 194, 70);
-	}
-
-	& button.noWasOrder:hover {
-		background-color: rgb(102, 247, 145);
-	}
-
-	& button.wasOrder:disabled {
-		background-color: rgb(102, 247, 145);
-		cursor: not-allowed;
-	}
-
-	& button.deleteOrder {
-		background-color: rgb(192, 36, 36);
-	}
-
-	& button.deleteOrder:disabled {
-		background-color: rgb(206, 64, 64);
-		cursor: not-allowed;
-	}
-
 	& input[type=number]::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 	}

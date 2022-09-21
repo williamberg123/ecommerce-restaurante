@@ -1,25 +1,26 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { MdRestaurantMenu } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import HeadingContainer from '../../components/HeadingContainer';
 import OrderItem from '../../components/OrderItem';
 import RenderIf from '../../components/RenderIf';
-import { AppContext } from '../../contexts/AppProvider/context';
 
 import useMediaQuery from '../../hooks/useMediaQuery';
+import { setActuallyPage } from '../../state/reducers/actuallyPageSlice';
+import { resetOrdersCounter } from '../../state/reducers/ordersCounterSlice';
 import { Container, OrderItemsContainer } from './styles';
 
 export default function OrderPage() {
-	const { funcSetActuallyPage } = useContext(AppContext);
-
 	const orders = useSelector((state) => state.orders);
+	const dispatch = useDispatch();
 
 	const isMobile = useMediaQuery('(max-width: 600px)');
 
 	useEffect(() => {
-		funcSetActuallyPage('order');
+		dispatch(setActuallyPage('order'));
+		dispatch(resetOrdersCounter());
 	}, []);
 
 	return (
