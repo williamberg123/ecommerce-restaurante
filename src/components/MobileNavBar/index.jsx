@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Nav } from './styles';
 
 export default function MobileNavBar({ isFirstRender, isOpen, toggleMobileMenu }) {
-	const { actuallyPage, ordersCounter } = useSelector((state) => state);
+	const { page, ordersCounter } = useSelector((state) => state);
 
 	return (
 		<Nav isFirstRender={isFirstRender} isOpen={isOpen}>
@@ -13,7 +13,7 @@ export default function MobileNavBar({ isFirstRender, isOpen, toggleMobileMenu }
 				<li>
 					<NavLink
 						onClick={toggleMobileMenu}
-						className={`${actuallyPage === 'home' ? 'actually-page' : ''}`}
+						className={`${page === 'home' ? 'actually-page' : ''}`}
 						to="/ecommerce-restaurante/"
 					>
 						HOME
@@ -23,7 +23,7 @@ export default function MobileNavBar({ isFirstRender, isOpen, toggleMobileMenu }
 				<li>
 					<NavLink
 						onClick={toggleMobileMenu}
-						className={`${actuallyPage === 'menu' ? 'actually-page' : ''}`}
+						className={`${page === 'menu' ? 'actually-page' : ''}`}
 						to="/ecommerce-restaurante/cardapio"
 					>
 						CARDÁPIO
@@ -33,7 +33,7 @@ export default function MobileNavBar({ isFirstRender, isOpen, toggleMobileMenu }
 				<li>
 					<NavLink
 						onClick={toggleMobileMenu}
-						className={`${actuallyPage === 'order' ? 'actually-page' : ''}`}
+						className={`${page === 'order' ? 'actually-page' : ''}`}
 						to="/ecommerce-restaurante/pedidos"
 					>
 						SEUS PEDIDOS

@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FaWindowClose } from 'react-icons/fa';
 
-import { removeOrder } from '../../state/reducers/menuSlice';
+import { removeOrder } from '../../store/reducers/menuSlice';
 import { Button } from './styles';
 
 export default function RemoveOrderButton({ itemId }) {

@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppRoutes from './routes';
 
 import { GlobalStyles } from './styles/globalStyles';
-import { loadMenu, menuLoading } from './state/reducers/menuSlice';
+import { loadMenu, menuLoading } from './store/reducers/menuSlice';
 import removeDuplicateItems from './utils/removeDuplicateItems';
 import { loadAllMenu } from './services/menuApi';
-import { getOrders } from './state/reducers/ordersSlice';
+import { getOrders } from './store/reducers/ordersSlice';
 
 export default function App() {
 	const dispatch = useDispatch();

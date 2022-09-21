@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import ConfirmPurchaseButton from '../../components/ConfirmPurchaseButton';
 
-import { setIsClosedAccount } from '../../state/reducers/accountStateSlice';
-import { setActuallyPage } from '../../state/reducers/actuallyPageSlice';
+import { setIsClosedAccount } from '../../store/reducers/accountStateSlice';
+import { setActuallyPage } from '../../store/reducers/actuallyPageSlice';
 
 import calcSum from '../../utils/calculateAccount';
 

@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { FaCheckCircle, FaPlusCircle } from 'react-icons/fa';
 
 import RenderIf from '../RenderIf';
-import { addOrder } from '../../state/reducers/menuSlice';
-import { addOne } from '../../state/reducers/ordersCounterSlice';
+import { addOrder } from '../../store/reducers/menuSlice';
+import { addOne } from '../../store/reducers/ordersCounterSlice';
 import { Button } from './styles';
 
 export default function AddOrderButton({ hasAlreadyBeenOrdered, itemId }) {

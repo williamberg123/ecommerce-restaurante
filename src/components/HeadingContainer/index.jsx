@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import calcSum from '../../utils/calculateAccount';
 import { Container } from './styles';
 import useMediaQuery from '../../hooks/useMediaQuery';
-import { setIsClosedAccount } from '../../state/reducers/accountStateSlice';
+import { setIsClosedAccount } from '../../store/reducers/accountStateSlice';
 
 export default function HeadingContainer({ title }) {
 	const [value, setValue] = useState(0);

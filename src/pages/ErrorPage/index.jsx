@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setActuallyPage } from '../../state/reducers/actuallyPageSlice';
+import { setActuallyPage } from '../../store/reducers/actuallyPageSlice';
 
 import { Container } from './styles';
 

@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { FaPlus } from 'react-icons/fa';
-import { decrementTheAmount, incrementTheAmount } from '../../state/reducers/menuSlice';
+import { decrementTheAmount, incrementTheAmount } from '../../store/reducers/menuSlice';
 import { Button } from './styles';
 
 export default function ButtonOfTheAmount({ _id, buttonAction, isDisabled }) {

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import MenuItem from '../../components/MenuItem';
 import RenderIf from '../../components/RenderIf';
-import { setActuallyPage } from '../../state/reducers/actuallyPageSlice';
+import { setActuallyPage } from '../../store/reducers/actuallyPageSlice';
 
 import { Container, MenuItemsContainer } from './styles';
 

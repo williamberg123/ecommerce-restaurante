@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Container } from './styles';
+import { Container, Title } from './styles';
 
-import Title from '../../components/Title';
-import { setActuallyPage } from '../../state/reducers/actuallyPageSlice';
+import { setActuallyPage } from '../../store/reducers/actuallyPageSlice';
 
 export default function Home() {
 	const dispatch = useDispatch();
@@ -14,7 +13,10 @@ export default function Home() {
 
 	return (
 		<Container>
-			<Title />
+			<Title>
+				<h1>Berg</h1>
+				<h2>Bar e Restaurante</h2>
+			</Title>
 		</Container>
 	);
 }

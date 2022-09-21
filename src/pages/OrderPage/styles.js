@@ -4,23 +4,16 @@ export const Container = styled.div`
 	width: 100%;
 	text-align: center;
 
-	& > span {
+	& > span.no-orders-icon {
 		display: flex;
-		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 		color: white;
-		z-index: 5;
 		font-weight: bold;
 		font-variant: small-caps;
 		text-transform: uppercase;
 		font-size: 1.2rem;
 		margin-top: 70px;
-
-		& svg {
-			width: 150px;
-			height: 150px;
-			z-index: 3;
-		}
 	}
 `;
 

@@ -4,7 +4,6 @@ export const Container = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 20px;
-	z-index: 3;
 
 	${({ isMobile }) => isMobile && css`
 		padding-top: 90px;
